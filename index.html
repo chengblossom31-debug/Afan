@@ -6,375 +6,171 @@
   <title>阿芳師 Handmade Bakery</title>
   <meta name="description" content="阿芳師手工烘焙，米貝果、芋粿巧、蘿蔔糕、鳳梨酥、蛋黃酥，用心製作台灣傳統好味道。">
   <style>
-    /* ── Reset & Base ── */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
     body {
-      font-family: 'PingFang TC', 'Microsoft JhengHei', 'Heiti TC', sans-serif;
-      background: #F7EFE3;
-      color: #3A2010;
-      min-height: 100vh;
+      font-family:'PingFang TC','Microsoft JhengHei','Heiti TC',sans-serif;
+      background:#F7EFE3; color:#3A2010; min-height:100vh;
     }
-    img { display: block; max-width: 100%; }
-    .pg { display: none; }
-    .pg.on { display: block; }
+    img { display:block; max-width:100%; }
+    .pg { display:none; } .pg.on { display:block; }
 
-    /* ── Nav ── */
     nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(247, 239, 227, 0.97);
-      border-bottom: 1px solid rgba(92, 51, 23, 0.15);
-      padding: 0 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 60px;
-      backdrop-filter: blur(8px);
+      position:sticky; top:0; z-index:100;
+      background:rgba(247,239,227,.97); border-bottom:1px solid rgba(92,51,23,.15);
+      padding:0 2rem; display:flex; align-items:center; justify-content:space-between;
+      height:60px; backdrop-filter:blur(8px);
     }
-    .nlogo {
-      display: flex; align-items: center; gap: 10px;
-      cursor: pointer; text-decoration: none;
-    }
-    .nlogo-text {
-      font-family: 'Songti SC', 'STSong', 'Noto Serif CJK TC', Georgia, serif;
-      font-size: 17px; color: #5C3317; letter-spacing: 3px; font-weight: 500; display: block;
-    }
-    .nlogo-sub {
-      font-size: 8px; letter-spacing: 3px; color: #9B7B65; display: block; margin-top: 1px;
-    }
+    .nlogo { display:flex; align-items:center; gap:10px; cursor:pointer; }
+    .nlogo-text { font-family:'Songti SC','STSong',Georgia,serif; font-size:17px; color:#5C3317; letter-spacing:3px; font-weight:500; display:block; }
+    .nlogo-sub  { font-size:8px; letter-spacing:3px; color:#9B7B65; display:block; margin-top:1px; }
 
-    /* ── Buttons (all inline-style for environment compatibility) ── */
-
-    /* ── Hero ── */
     .hero {
-      height: 480px;
-      background: linear-gradient(155deg, #E8D3A8 0%, #D4B485 35%, #C09060 65%, #A87A4A 100%);
-      display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
+      height:480px;
+      background:linear-gradient(155deg,#E8D3A8 0%,#D4B485 35%,#C09060 65%,#A87A4A 100%);
+      display:flex; align-items:center; justify-content:center;
+      position:relative; overflow:hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 30% 65%, rgba(255,248,235,.2) 0%, transparent 60%);
-    }
-    .hero::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
-      background: linear-gradient(to top, #F7EFE3, transparent);
-    }
-    .hero-img {
-      position: absolute; inset: 0;
-      object-fit: cover; width: 100%; height: 100%;
-      opacity: 0.45;
-    }
-    .hero-cnt {
-      text-align: center; position: relative; z-index: 1;
-      padding: 0 1.5rem;
-    }
-    .hero-ey {
-      font-size: 9px; letter-spacing: 6px; color: rgba(92,51,23,.55);
-      margin-bottom: 18px; text-transform: uppercase;
-    }
-    .hero-t {
-      font-family: 'Songti SC', 'STSong', Georgia, serif;
-      font-size: 64px; color: #5C3317; font-weight: 700;
-      line-height: 1; margin-bottom: 12px;
-    }
-    .hero-sub {
-      font-size: 13px; color: rgba(58,32,16,.6);
-      letter-spacing: 3px; margin-bottom: 38px;
-    }
+    .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 30% 65%,rgba(255,248,235,.2) 0%,transparent 60%); }
+    .hero::after  { content:''; position:absolute; bottom:0; left:0; right:0; height:100px; background:linear-gradient(to top,#F7EFE3,transparent); }
+    .hero-img { position:absolute; inset:0; object-fit:cover; width:100%; height:100%; opacity:.45; }
+    .hero-cnt { text-align:center; position:relative; z-index:1; padding:0 1.5rem; }
+    .hero-ey  { font-size:9px; letter-spacing:6px; color:rgba(92,51,23,.55); margin-bottom:18px; text-transform:uppercase; }
+    .hero-t   { font-family:'Songti SC','STSong',Georgia,serif; font-size:64px; color:#5C3317; font-weight:700; line-height:1; margin-bottom:12px; }
+    .hero-sub { font-size:13px; color:rgba(58,32,16,.6); letter-spacing:3px; margin-bottom:38px; }
 
-    /* ── Section ── */
-    .sec {
-      padding: 56px 2rem;
-      max-width: 960px; margin: 0 auto;
-    }
-    .sec-hd { margin-bottom: 40px; }
-    .sec-hd h2 {
-      font-family: 'Songti SC', 'STSong', Georgia, serif;
-      font-size: 22px; color: #5C3317; margin-bottom: 6px;
-    }
-    .sec-hd p {
-      font-size: 10px; color: #9B7B65; letter-spacing: 4px;
-    }
-    .sec-hd hr {
-      width: 32px; height: 1px; background: #C49A6C; border: none; margin: 10px 0 0;
-    }
+    .sec { padding:56px 2rem; max-width:960px; margin:0 auto; }
+    .sec-hd { margin-bottom:40px; }
+    .sec-hd h2 { font-family:'Songti SC','STSong',Georgia,serif; font-size:22px; color:#5C3317; margin-bottom:6px; }
+    .sec-hd p  { font-size:10px; color:#9B7B65; letter-spacing:4px; }
+    .sec-hd hr { width:32px; height:1px; background:#C49A6C; border:none; margin:10px 0 0; }
 
-    /* ── Product Grid ── */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-    .pcard { cursor: pointer; transition: transform .25s; }
-    .pcard:hover { transform: translateY(-6px); }
+    /* ── Grid ── */
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+    .pcard { cursor:pointer; transition:transform .25s; }
+    .pcard:hover:not(.sold-out-card) { transform:translateY(-6px); }
+    .pcard.sold-out-card { cursor:not-allowed; opacity:.65; }
+
     .pimg {
-      aspect-ratio: 1; border-radius: 8px; margin-bottom: 14px;
-      display: flex; align-items: center; justify-content: center;
-      border: 1px solid rgba(92,51,23,.08); overflow: hidden;
+      aspect-ratio:1; border-radius:8px; margin-bottom:14px;
+      display:flex; align-items:center; justify-content:center;
+      border:1px solid rgba(92,51,23,.08); overflow:hidden; position:relative;
     }
-    .pimg img {
-      width: 100%; height: 100%; object-fit: cover; border-radius: 8px;
-    }
-    .pimg-placeholder {
-      text-align: center; padding: 1rem;
-    }
-    .pimg-placeholder em {
-      display: block; font-style: normal; font-size: 9px; color: #9B7B65;
-      letter-spacing: 1px; margin-bottom: 8px;
-      border: 1px solid rgba(92,51,23,.13); padding: 2px 8px;
-      border-radius: 8px; display: inline-block;
-    }
-    .pimg-placeholder strong {
-      display: block;
-      font-family: 'Songti SC', 'STSong', Georgia, serif;
-      font-size: 20px; color: #5C3317;
-    }
-    .pname {
-      font-family: 'Songti SC', 'STSong', Georgia, serif;
-      font-size: 15px; color: #3A2010; margin-bottom: 4px;
-    }
-    .pwt { font-size: 11px; color: #9B7B65; margin-bottom: 6px; }
-    .ppr { font-size: 14px; color: #8B5A2B; font-weight: 600; }
-    .pveg {
-      display: inline-block; margin-top: 5px;
-      font-size: 9px; color: #4A7040; background: #E8F0E0;
-      border: 1px solid rgba(74,112,64,.3);
-      padding: 2px 8px; border-radius: 10px; font-weight: 600;
+    .pimg img { width:100%; height:100%; object-fit:cover; border-radius:8px; }
+    .pimg-placeholder { text-align:center; padding:1rem; }
+    .pimg-placeholder em { display:block; font-style:normal; font-size:9px; color:#9B7B65; letter-spacing:1px; margin-bottom:8px; border:1px solid rgba(92,51,23,.13); padding:2px 8px; border-radius:8px; display:inline-block; }
+    .pimg-placeholder strong { display:block; font-family:'Songti SC','STSong',Georgia,serif; font-size:20px; color:#5C3317; }
+
+    /* 售完遮罩 */
+    .sold-overlay {
+      position:absolute; inset:0; background:rgba(247,239,227,.82);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Songti SC',Georgia,serif; font-size:18px; color:#B54020;
+      letter-spacing:3px; border-radius:8px;
     }
 
-    /* ── Product Detail ── */
-    .det-wrap {
-      max-width: 880px; margin: 0 auto;
-      padding: 40px 2rem 80px;
-    }
-    .back {
-      font-size: 13px; color: #9B7B65; cursor: pointer;
-      display: inline-flex; align-items: center; gap: 6px;
-      margin-bottom: 32px; padding: 6px 0;
-      border-bottom: 1px solid transparent; transition: all .2s;
-    }
-    .back:hover { color: #5C3317; border-color: #C49A6C; }
-    .det-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 56px; align-items: start;
-    }
-    .dimg-box {
-      aspect-ratio: 1; border-radius: 8px; overflow: hidden;
-      border: 1px solid rgba(92,51,23,.08);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .dimg-box img { width: 100%; height: 100%; object-fit: cover; }
-    .dname {
-      font-family: 'Songti SC', 'STSong', Georgia, serif;
-      font-size: 26px; color: #3A2010; margin-bottom: 12px; line-height: 1.3;
-    }
-    .dpw {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 20px; flex-wrap: wrap;
-    }
-    .dpr { font-size: 24px; color: #5C3317; font-weight: 600; }
-    .dwt {
-      font-size: 11px; color: #9B7B65; background: #EDE0CF;
-      padding: 4px 12px; border-radius: 12px;
-    }
-    .dtag {
-      font-size: 10px; color: #4A7040; background: #E8F0E0;
-      border: 1px solid rgba(74,112,64,.3);
-      padding: 4px 12px; border-radius: 12px; font-weight: 600;
-    }
-    .ddesc {
-      font-size: 13.5px; color: #6B5040; line-height: 2.1;
-      margin-bottom: 22px;
-      border-left: 2px solid #D9C9B2; padding-left: 16px;
-    }
-    .ingr-box {
-      background: #FDFAF6;
-      border: 1px solid rgba(92,51,23,.1);
-      border-radius: 6px; padding: 16px 18px; margin-bottom: 28px;
-    }
-    .ingr-title {
-      font-size: 9px; letter-spacing: 2px; color: #9B7B65;
-      margin-bottom: 8px; text-transform: uppercase;
-    }
-    .ingr-text { font-size: 12.5px; color: #7A5A48; line-height: 2; }
-    .flv-lbl {
-      font-size: 9px; letter-spacing: 2px; color: #9B7B65;
-      display: block; margin-bottom: 12px; text-transform: uppercase;
-    }
-    .flvs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-    .qty-lbl {
-      font-size: 9px; letter-spacing: 2px; color: #9B7B65;
-      display: block; margin-bottom: 12px; text-transform: uppercase;
-    }
-    .qty-row { display: flex; align-items: center; margin-bottom: 30px; }
-    .qb {
-      width: 38px; height: 38px;
-      border: 1px solid rgba(92,51,23,.2); background: #FDFAF6;
-      cursor: pointer; font-size: 18px; color: #3A2010;
-      display: flex; align-items: center; justify-content: center;
-      transition: background .15s; font-weight: 400;
-    }
-    .qb:first-child { border-radius: 3px 0 0 3px; }
-    .qb:last-child  { border-radius: 0 3px 3px 0; }
-    .qb:hover { background: #EDE0CF; }
-    .qv {
-      width: 54px; height: 38px;
-      border-top: 1px solid rgba(92,51,23,.2); border-bottom: 1px solid rgba(92,51,23,.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 15px; background: #FDFAF6; color: #3A2010;
-    }
+    .pname { font-family:'Songti SC','STSong',Georgia,serif; font-size:15px; color:#3A2010; margin-bottom:4px; }
+    .pwt   { font-size:11px; color:#9B7B65; margin-bottom:6px; }
+    .ppr   { font-size:14px; color:#8B5A2B; font-weight:600; }
+    .pveg  { display:inline-block; margin-top:5px; font-size:9px; color:#4A7040; background:#E8F0E0; border:1px solid rgba(74,112,64,.3); padding:2px 8px; border-radius:10px; font-weight:600; }
+    .pstock-low  { display:inline-block; margin-top:5px; font-size:10px; color:#E65100; background:#FFF3E0; border:1px solid rgba(230,81,0,.25); padding:2px 8px; border-radius:10px; font-weight:600; }
+    .pstock-zero { display:inline-block; margin-top:5px; font-size:10px; color:#B54020; background:#FFE0E0; border:1px solid rgba(181,64,32,.25); padding:2px 8px; border-radius:10px; font-weight:600; }
+
+    /* ── Detail ── */
+    .det-wrap { max-width:880px; margin:0 auto; padding:40px 2rem 80px; }
+    .back { font-size:13px; color:#9B7B65; cursor:pointer; display:inline-flex; align-items:center; gap:6px; margin-bottom:32px; padding:6px 0; border-bottom:1px solid transparent; transition:all .2s; }
+    .back:hover { color:#5C3317; border-color:#C49A6C; }
+    .det-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
+    .dimg-box { aspect-ratio:1; border-radius:8px; overflow:hidden; border:1px solid rgba(92,51,23,.08); display:flex; align-items:center; justify-content:center; }
+    .dimg-box img { width:100%; height:100%; object-fit:cover; }
+    .dname { font-family:'Songti SC','STSong',Georgia,serif; font-size:26px; color:#3A2010; margin-bottom:12px; line-height:1.3; }
+    .dpw { display:flex; align-items:center; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+    .dpr  { font-size:24px; color:#5C3317; font-weight:600; }
+    .dwt  { font-size:11px; color:#9B7B65; background:#EDE0CF; padding:4px 12px; border-radius:12px; }
+    .dtag { font-size:10px; color:#4A7040; background:#E8F0E0; border:1px solid rgba(74,112,64,.3); padding:4px 12px; border-radius:12px; font-weight:600; }
+    .ddesc { font-size:13.5px; color:#6B5040; line-height:2.1; margin-bottom:22px; border-left:2px solid #D9C9B2; padding-left:16px; }
+    .ingr-box { background:#FDFAF6; border:1px solid rgba(92,51,23,.1); border-radius:6px; padding:16px 18px; margin-bottom:28px; }
+    .ingr-title { font-size:9px; letter-spacing:2px; color:#9B7B65; margin-bottom:8px; text-transform:uppercase; }
+    .ingr-text { font-size:12.5px; color:#7A5A48; line-height:2; }
+    .flv-lbl { font-size:9px; letter-spacing:2px; color:#9B7B65; display:block; margin-bottom:12px; text-transform:uppercase; }
+    .flvs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px; }
+    .qty-lbl { font-size:9px; letter-spacing:2px; color:#9B7B65; display:block; margin-bottom:12px; text-transform:uppercase; }
+    .qty-row { display:flex; align-items:center; margin-bottom:30px; }
+    .qb { width:38px; height:38px; border:1px solid rgba(92,51,23,.2); background:#FDFAF6; cursor:pointer; font-size:18px; color:#3A2010; display:flex; align-items:center; justify-content:center; transition:background .15s; }
+    .qb:first-child { border-radius:3px 0 0 3px; } .qb:last-child { border-radius:0 3px 3px 0; }
+    .qb:hover { background:#EDE0CF; }
+    .qv { width:54px; height:38px; border-top:1px solid rgba(92,51,23,.2); border-bottom:1px solid rgba(92,51,23,.2); display:flex; align-items:center; justify-content:center; font-size:15px; background:#FDFAF6; }
+    /* 庫存提示（詳情頁） */
+    .d-stock-info { margin-bottom:16px; font-size:12px; }
+    .d-stock-low  { color:#E65100; } .d-stock-zero { color:#B54020; font-weight:600; }
 
     /* ── Cart ── */
-    .pg-wrap { max-width: 620px; margin: 0 auto; padding: 40px 2rem 72px; }
-    .pg-title {
-      font-family: 'Songti SC', 'STSong', Georgia, serif;
-      font-size: 22px; color: #5C3317; margin-bottom: 32px;
-    }
-    .ci {
-      display: grid; grid-template-columns: 58px 1fr auto;
-      gap: 16px; align-items: center;
-      padding: 18px 0; border-bottom: 1px solid rgba(92,51,23,.1);
-    }
-    .cthumb {
-      width: 58px; height: 58px; border-radius: 6px; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Songti SC', Georgia, serif; font-size: 18px; color: #5C3317;
-    }
-    .cthumb img { width: 100%; height: 100%; object-fit: cover; }
-    .ciname {
-      font-family: 'Songti SC', Georgia, serif; font-size: 14px; margin-bottom: 3px;
-    }
-    .cisub { font-size: 11px; color: #9B7B65; margin-bottom: 10px; }
-    .cipr { font-size: 15px; color: #5C3317; font-weight: 600; white-space: nowrap; align-self: center; }
-    .cart-total {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 22px 0; border-top: 1px solid #C49A6C; margin-top: 6px;
-    }
-    .ctlbl { font-family: 'Songti SC', Georgia, serif; font-size: 16px; }
-    .ctval { font-size: 24px; color: #5C3317; font-weight: 600; }
-    .acts { display: flex; gap: 12px; margin-top: 6px; }
+    .pg-wrap { max-width:620px; margin:0 auto; padding:40px 2rem 72px; }
+    .pg-title { font-family:'Songti SC','STSong',Georgia,serif; font-size:22px; color:#5C3317; margin-bottom:32px; }
+    .ci { display:grid; grid-template-columns:58px 1fr auto; gap:16px; align-items:center; padding:18px 0; border-bottom:1px solid rgba(92,51,23,.1); }
+    .cthumb { width:58px; height:58px; border-radius:6px; overflow:hidden; display:flex; align-items:center; justify-content:center; font-family:'Songti SC',Georgia,serif; font-size:18px; color:#5C3317; }
+    .cthumb img { width:100%; height:100%; object-fit:cover; }
+    .ciname { font-family:'Songti SC',Georgia,serif; font-size:14px; margin-bottom:3px; }
+    .cisub  { font-size:11px; color:#9B7B65; margin-bottom:10px; }
+    .cipr   { font-size:15px; color:#5C3317; font-weight:600; white-space:nowrap; align-self:center; }
+    .cart-total { display:flex; justify-content:space-between; align-items:center; padding:22px 0; border-top:1px solid #C49A6C; margin-top:6px; }
+    .ctlbl { font-family:'Songti SC',Georgia,serif; font-size:16px; }
+    .ctval { font-size:24px; color:#5C3317; font-weight:600; }
+    .acts  { display:flex; gap:12px; margin-top:6px; }
 
-    /* ── Checkout Form ── */
-    .fg { margin-bottom: 18px; }
-    .flabel {
-      font-size: 9px; letter-spacing: 2px; color: #9B7B65;
-      display: block; margin-bottom: 9px; text-transform: uppercase;
-    }
-    .finput {
-      width: 100%; padding: 12px 14px;
-      border: 1px solid rgba(92,51,23,.18); border-radius: 3px;
-      background: #FDFAF6; font-family: inherit; font-size: 14px; color: #3A2010;
-      outline: none; transition: border-color .2s; -webkit-appearance: none;
-    }
-    .finput:focus { border-color: #8B4513; }
-    .finput.err { border-color: #B54020; }
-    textarea.finput { height: 80px; resize: none; line-height: 1.7; }
-    .note-box {
-      margin-top: 12px; margin-bottom: 32px;
-      padding: 14px 16px; background: #EDE0CF;
-      border-radius: 3px; font-size: 11.5px; color: #9B7B65; line-height: 1.9;
-    }
+    /* ── Checkout ── */
+    .fg { margin-bottom:18px; }
+    .flabel { font-size:9px; letter-spacing:2px; color:#9B7B65; display:block; margin-bottom:9px; text-transform:uppercase; }
+    .finput { width:100%; padding:12px 14px; border:1px solid rgba(92,51,23,.18); border-radius:3px; background:#FDFAF6; font-family:inherit; font-size:14px; color:#3A2010; outline:none; transition:border-color .2s; -webkit-appearance:none; }
+    .finput:focus { border-color:#8B4513; }
+    .finput.err   { border-color:#B54020; }
+    textarea.finput { height:80px; resize:none; line-height:1.7; }
+    .note-box { margin-top:12px; margin-bottom:32px; padding:14px 16px; background:#EDE0CF; border-radius:3px; font-size:11.5px; color:#9B7B65; line-height:1.9; }
 
     /* ── Confirm Modal ── */
-    .modal-bg {
-      min-height: calc(100vh - 60px);
-      background: rgba(10,4,1,.65);
-      display: flex; align-items: center; justify-content: center; padding: 2rem;
-    }
-    .modal {
-      background: #FDFAF6; border-radius: 6px; padding: 36px;
-      max-width: 460px; width: 100%;
-      box-shadow: 0 20px 60px rgba(0,0,0,.25);
-    }
-    .modal-title {
-      font-family: 'Songti SC', Georgia, serif; font-size: 19px; color: #5C3317;
-      margin-bottom: 22px; padding-bottom: 18px;
-      border-bottom: 1px solid rgba(92,51,23,.13);
-    }
-    .sec-sm {
-      font-size: 9px; letter-spacing: 2px; color: #9B7B65;
-      margin: 16px 0 10px; text-transform: uppercase;
-    }
-    .crow {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      padding: 9px 0; border-bottom: 1px solid rgba(92,51,23,.09);
-      font-size: 13px; gap: 14px;
-    }
-    .crow span:first-child { color: #9B7B65; flex-shrink: 0; }
-    .crow span:last-child { text-align: right; line-height: 1.7; }
-    .conf-total {
-      display: flex; justify-content: space-between;
-      padding: 16px 0 0; font-size: 16px; font-weight: 600; color: #5C3317;
-      border-top: 1px solid #C49A6C; margin-top: 8px;
-    }
-    .macts { display: flex; gap: 12px; margin-top: 24px; }
+    .modal-bg { min-height:calc(100vh - 60px); background:rgba(10,4,1,.65); display:flex; align-items:center; justify-content:center; padding:2rem; }
+    .modal { background:#FDFAF6; border-radius:6px; padding:36px; max-width:460px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,.25); }
+    .modal-title { font-family:'Songti SC',Georgia,serif; font-size:19px; color:#5C3317; margin-bottom:22px; padding-bottom:18px; border-bottom:1px solid rgba(92,51,23,.13); }
+    .sec-sm { font-size:9px; letter-spacing:2px; color:#9B7B65; margin:16px 0 10px; text-transform:uppercase; }
+    .crow { display:flex; justify-content:space-between; align-items:flex-start; padding:9px 0; border-bottom:1px solid rgba(92,51,23,.09); font-size:13px; gap:14px; }
+    .crow span:first-child { color:#9B7B65; flex-shrink:0; }
+    .crow span:last-child  { text-align:right; line-height:1.7; }
+    .conf-total { display:flex; justify-content:space-between; padding:16px 0 0; font-size:16px; font-weight:600; color:#5C3317; border-top:1px solid #C49A6C; margin-top:8px; }
+    .macts { display:flex; gap:12px; margin-top:24px; }
 
     /* ── Success ── */
-    .suc-wrap {
-      max-width: 440px; margin: 72px auto;
-      padding: 2rem; text-align: center;
-    }
-    .suc-icon {
-      width: 72px; height: 72px; background: #8B4513;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 24px; font-size: 28px; color: #fff; font-weight: 700;
-    }
-    .suc-title {
-      font-family: 'Songti SC', Georgia, serif; font-size: 24px; color: #5C3317; margin-bottom: 12px;
-    }
-    .suc-sub { font-size: 13px; color: #9B7B65; line-height: 2; }
-    .suc-num {
-      font-size: 18px; color: #8B4513;
-      font-family: 'Songti SC', Georgia, serif;
-      margin: 22px 0 36px; letter-spacing: 2px;
-      padding: 14px 24px; background: #EDE0CF;
-      border-radius: 3px; display: inline-block;
-      border-left: 3px solid #8B4513;
-    }
+    .suc-wrap { max-width:440px; margin:72px auto; padding:2rem; text-align:center; }
+    .suc-icon { width:72px; height:72px; background:#8B4513; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:28px; color:#fff; font-weight:700; }
+    .suc-title { font-family:'Songti SC',Georgia,serif; font-size:24px; color:#5C3317; margin-bottom:12px; }
+    .suc-sub   { font-size:13px; color:#9B7B65; line-height:2; }
+    .suc-num   { font-size:18px; color:#8B4513; font-family:'Songti SC',Georgia,serif; margin:22px 0 36px; letter-spacing:2px; padding:14px 24px; background:#EDE0CF; border-radius:3px; display:inline-block; border-left:3px solid #8B4513; }
 
     /* ── Loading overlay ── */
-    .loading-overlay {
-      display: none; position: fixed; inset: 0; z-index: 999;
-      background: rgba(247,239,227,.88); backdrop-filter: blur(4px);
-      align-items: center; justify-content: center; flex-direction: column; gap: 16px;
-    }
-    .loading-overlay.on { display: flex; }
-    .spinner {
-      width: 40px; height: 40px; border: 3px solid #EDE0CF;
-      border-top-color: #8B4513; border-radius: 50%;
-      animation: spin .8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .loading-txt {
-      font-family: 'Songti SC', Georgia, serif; font-size: 14px;
-      color: #8B4513; letter-spacing: 2px;
-    }
+    .loading-overlay { display:none; position:fixed; inset:0; z-index:999; background:rgba(247,239,227,.88); backdrop-filter:blur(4px); align-items:center; justify-content:center; flex-direction:column; gap:16px; }
+    .loading-overlay.on { display:flex; }
+    .spinner { width:40px; height:40px; border:3px solid #EDE0CF; border-top-color:#8B4513; border-radius:50%; animation:spin .8s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .loading-txt { font-family:'Songti SC',Georgia,serif; font-size:14px; color:#8B4513; letter-spacing:2px; }
 
-    /* ── Responsive ── */
-    @media (max-width: 640px) {
-      .grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-      .det-grid { grid-template-columns: 1fr; gap: 28px; }
-      .hero-t { font-size: 46px; }
-      nav { padding: 0 1rem; }
-      .sec { padding: 40px 1rem; }
-      .det-wrap { padding: 28px 1rem 60px; }
-      .pg-wrap { padding: 28px 1rem 60px; }
+    @media (max-width:640px) {
+      .grid { grid-template-columns:repeat(2,1fr); gap:16px; }
+      .det-grid { grid-template-columns:1fr; gap:28px; }
+      .hero-t { font-size:46px; }
+      nav { padding:0 1rem; }
+      .sec { padding:40px 1rem; }
+      .det-wrap { padding:28px 1rem 60px; }
+      .pg-wrap  { padding:28px 1rem 60px; }
     }
-    @media (max-width: 380px) {
-      .grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width:380px) { .grid { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
 
-<!-- ══ Loading Overlay ══ -->
 <div class="loading-overlay" id="loading">
   <div class="spinner"></div>
-  <div class="loading-txt">訂單送出中…</div>
+  <div class="loading-txt" id="loading-txt">訂單送出中…</div>
 </div>
 
-<!-- ══ Nav ══ -->
 <nav>
   <div class="nlogo" onclick="go('home')">
     <svg width="38" height="38" viewBox="0 0 36 36" fill="none" aria-hidden="true">
@@ -386,64 +182,39 @@
       <path d="M10 19 Q8.2 17.5 10 15.8" stroke="#5C3317" stroke-width="0.9" fill="none" stroke-linecap="round"/>
       <path d="M11.5 21.5 Q9.5 20 11.5 18.2" stroke="#5C3317" stroke-width="0.9" fill="none" stroke-linecap="round"/>
     </svg>
-    <div>
-      <span class="nlogo-text">阿芳師</span>
-      <span class="nlogo-sub">HANDMADE BAKERY</span>
-    </div>
+    <div><span class="nlogo-text">阿芳師</span><span class="nlogo-sub">HANDMADE BAKERY</span></div>
   </div>
-  <button
-    onclick="openCart()"
-    onmouseover="this.style.background='#6B3310'"
-    onmouseout="this.style.background='#8B4513'"
-    style="display:flex;align-items:center;gap:9px;background:#8B4513;color:#fff;border:none;border-radius:20px;padding:9px 20px;font-size:13px;cursor:pointer;font-family:inherit;letter-spacing:1px;font-weight:600;transition:background .2s"
-    aria-label="購物車">
+  <button onclick="openCart()" onmouseover="this.style.background='#6B3310'" onmouseout="this.style.background='#8B4513'"
+    style="display:flex;align-items:center;gap:9px;background:#8B4513;color:#fff;border:none;border-radius:20px;padding:9px 20px;font-size:13px;cursor:pointer;font-family:inherit;letter-spacing:1px;font-weight:600;transition:background .2s">
     購物車
-    <span id="cnt"
-      style="background:rgba(255,255,255,.28);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">0</span>
+    <span id="cnt" style="background:rgba(255,255,255,.28);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">0</span>
   </button>
 </nav>
 
-<!-- ══════════════════════════════════════
-     PAGE: HOME
-══════════════════════════════════════ -->
+<!-- HOME -->
 <div id="pg-home" class="pg on">
-
-  <!-- Hero -->
   <div class="hero">
-    <!-- 主視覺圖片：將 images/hero.jpg 替換為您的主視覺圖 -->
-    <!-- <img class="hero-img" src="images/hero.jpg" alt="阿芳師手工烘焙主視覺"> -->
+    <!-- 主視覺圖：準備好後取消下方註解 -->
+    <!-- <img class="hero-img" src="images/hero.jpg" alt="阿芳師手工烘焙"> -->
     <div class="hero-cnt">
       <div class="hero-ey">Handmade · Traditional · With Love</div>
       <div class="hero-t">阿芳師</div>
       <div class="hero-sub">手工現作・用心烘焙・台灣傳統好味道</div>
-      <button
-        onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})"
-        onmouseover="this.style.background='#6B3310'"
-        onmouseout="this.style.background='#8B4513'"
-        style="background:#8B4513;color:#fff;padding:13px 48px;border:none;font-family:'Songti SC','STSong',Georgia,serif;font-size:13px;letter-spacing:3px;cursor:pointer;border-radius:1px;font-weight:600;transition:background .2s">
-        探索商品
-      </button>
+      <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})"
+        onmouseover="this.style.background='#6B3310'" onmouseout="this.style.background='#8B4513'"
+        style="background:#8B4513;color:#fff;padding:13px 48px;border:none;font-family:'Songti SC','STSong',Georgia,serif;font-size:13px;letter-spacing:3px;cursor:pointer;border-radius:1px;font-weight:600;transition:background .2s">探索商品</button>
     </div>
   </div>
-
-  <!-- Product Grid -->
   <div class="sec" id="products">
-    <div class="sec-hd">
-      <h2>所有商品</h2>
-      <p>ALL PRODUCTS</p>
-      <hr>
-    </div>
+    <div class="sec-hd"><h2>所有商品</h2><p>ALL PRODUCTS</p><hr></div>
     <div class="grid" id="pgrid"></div>
   </div>
-
 </div>
 
-<!-- ══════════════════════════════════════
-     PAGE: PRODUCT DETAIL
-══════════════════════════════════════ -->
+<!-- PRODUCT DETAIL -->
 <div id="pg-product" class="pg">
   <div class="det-wrap">
-    <div class="back" onclick="go('home')" role="button" tabindex="0">← 返回商品列表</div>
+    <div class="back" onclick="go('home')">← 返回商品列表</div>
     <div class="det-grid">
       <div id="d-img"></div>
       <div id="d-info"></div>
@@ -451,465 +222,486 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     PAGE: CART
-══════════════════════════════════════ -->
-<div id="pg-cart" class="pg">
-  <div id="cart-content"></div>
-</div>
+<!-- CART -->
+<div id="pg-cart" class="pg"><div id="cart-content"></div></div>
 
-<!-- ══════════════════════════════════════
-     PAGE: CHECKOUT
-══════════════════════════════════════ -->
+<!-- CHECKOUT -->
 <div id="pg-checkout" class="pg">
   <div class="pg-wrap">
     <div class="back" onclick="openCart()">← 返回購物車</div>
     <div class="pg-title">填寫訂購資訊</div>
-
-    <div class="fg">
-      <label class="flabel" for="f-name">訂購人姓名 *</label>
-      <input class="finput" id="f-name" type="text" placeholder="請輸入您的姓名" autocomplete="name">
-    </div>
-    <div class="fg">
-      <label class="flabel" for="f-phone">聯絡電話 *</label>
-      <input class="finput" id="f-phone" type="tel" placeholder="請輸入聯絡電話" autocomplete="tel">
-    </div>
-    <div class="fg">
-      <label class="flabel" for="f-addr">收件地址 *</label>
-      <input class="finput" id="f-addr" type="text" placeholder="請輸入完整收件地址" autocomplete="street-address">
-    </div>
-    <div class="fg">
-      <label class="flabel" for="f-note">備註（選填）</label>
-      <textarea class="finput" id="f-note" placeholder="特殊需求、配送時段偏好…"></textarea>
-    </div>
-
-    <div class="note-box">
-      📌 訂單送出後，我們將以電話與您確認取貨方式及付款資訊，感謝您的耐心等候。
-    </div>
-
-    <button
-      onclick="toConfirm()"
-      onmouseover="this.style.background='#6B3310'"
-      onmouseout="this.style.background='#8B4513'"
-      style="width:100%;padding:16px;background:#8B4513;color:#fff;border:none;border-radius:3px;font-family:'Songti SC','STSong',Georgia,serif;font-size:14px;letter-spacing:2px;cursor:pointer;font-weight:600;display:block;transition:background .2s">
-      確認訂單 →
-    </button>
+    <div class="fg"><label class="flabel" for="f-name">訂購人姓名 *</label><input class="finput" id="f-name" type="text" placeholder="請輸入您的姓名" autocomplete="name"></div>
+    <div class="fg"><label class="flabel" for="f-phone">聯絡電話 *</label><input class="finput" id="f-phone" type="tel" placeholder="請輸入聯絡電話" autocomplete="tel"></div>
+    <div class="fg"><label class="flabel" for="f-addr">收件地址 *</label><input class="finput" id="f-addr" type="text" placeholder="請輸入完整收件地址" autocomplete="street-address"></div>
+    <div class="fg"><label class="flabel" for="f-note">備註（選填）</label><textarea class="finput" id="f-note" placeholder="特殊需求、配送時段偏好…"></textarea></div>
+    <div class="note-box">📌 訂單送出後，我們將以電話與您確認取貨方式及付款資訊，感謝您的耐心等候。</div>
+    <button onclick="toConfirm()" onmouseover="this.style.background='#6B3310'" onmouseout="this.style.background='#8B4513'"
+      style="width:100%;padding:16px;background:#8B4513;color:#fff;border:none;border-radius:3px;font-family:'Songti SC','STSong',Georgia,serif;font-size:14px;letter-spacing:2px;cursor:pointer;font-weight:600;display:block;transition:background .2s">確認訂單 →</button>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     PAGE: CONFIRM (Modal)
-══════════════════════════════════════ -->
+<!-- CONFIRM -->
 <div id="pg-confirm" class="pg">
-  <div class="modal-bg">
-    <div class="modal" id="modal-box"></div>
-  </div>
+  <div class="modal-bg"><div class="modal" id="modal-box"></div></div>
 </div>
 
-<!-- ══════════════════════════════════════
-     PAGE: SUCCESS
-══════════════════════════════════════ -->
+<!-- SUCCESS -->
 <div id="pg-success" class="pg">
   <div class="suc-wrap">
     <div class="suc-icon">✓</div>
     <div class="suc-title">訂單已送出！</div>
-    <div class="suc-sub">
-      感謝您的訂購，我們將盡快與您聯繫<br>確認取貨方式及付款資訊
-    </div>
+    <div class="suc-sub">感謝您的訂購，我們將盡快與您聯繫<br>確認取貨方式及付款資訊</div>
     <div class="suc-num" id="order-num"></div>
-    <button
-      onclick="go('home')"
-      onmouseover="this.style.background='#6B3310'"
-      onmouseout="this.style.background='#8B4513'"
-      style="max-width:200px;margin:0 auto;display:block;padding:14px;background:#8B4513;color:#fff;border:none;border-radius:3px;font-family:'Songti SC','STSong',Georgia,serif;font-size:13px;letter-spacing:2px;cursor:pointer;font-weight:600;width:100%;transition:background .2s">
-      返回首頁
-    </button>
+    <button onclick="go('home')" onmouseover="this.style.background='#6B3310'" onmouseout="this.style.background='#8B4513'"
+      style="max-width:200px;margin:0 auto;display:block;padding:14px;background:#8B4513;color:#fff;border:none;border-radius:3px;font-family:'Songti SC','STSong',Georgia,serif;font-size:13px;letter-spacing:2px;cursor:pointer;font-weight:600;width:100%;transition:background .2s">返回首頁</button>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     JavaScript
-══════════════════════════════════════ -->
 <script>
-  /* ────────────────────────────────
-     ★ 設定區：部署後填入您的 GAS URL
-  ──────────────────────────────── */ 
-  var GAS_URL   = 'https://script.google.com/macros/s/AKfycbxXzF8iSmKox-4leJCYG03xXBKpgWuiXDkan4sGb91IXFSxlSnKronfH4-FiTHg7otSrQ/exec';
-  var API_TOKEN = 'AFANG2025';   // 與 GAS ScriptProperties 的 API_TOKEN 相同
+/* ════════════════════════════════
+   ★ 設定區
+════════════════════════════════ */
+var GAS_URL   = 'https://script.google.com/macros/s/AKfycbyP1gXSgXJf725Ekij0MrI9CSJ20VnQXLCTDOE9iZey7DD2bjRVYvssm7y-duJcq5cW/exec';
+var API_TOKEN = 'AFANG2025';
 
-  /* ────────────────────────────────
-     商品資料
-  ──────────────────────────────── */
-  var prods = [
-    {
-      id: 1, name: '米貝果', wt: '125g／個', pr: 40,
-      tag: '全素友善',
-      img: 'images/bagel.jpg',
-      desc: '以米湯種揉入麵團中，讓貝果多了一份柔潤保濕的口感。外層帶有紮實嚼勁，入口後能感受到米香與麵香交織，Q彈不乾硬，越嚼越香，是簡單卻耐吃的日常風味。',
-      ingr: '橄欖油、海鹽、麵粉、米湯種、水、糖、酵母。',
-      flavors: ['原味','蔓越莓','伯爵','巧克力','抹茶','黑芝麻'],
-      clr: '#EAD9BC'
-    },
-    {
-      id: 2, name: '芋粿巧', wt: '120g／個', pr: 40,
-      tag: '',
-      img: 'images/taro.jpg',
-      desc: '嚴選大甲芋頭，搭配蝦米、台灣油蔥酥，以及屏東農產出品的 100% 糯米粉與蓬萊米粉製作。入口先是芋頭的鬆綿香氣，接著帶出蝦米與油蔥酥的鹹香層次，口感 Q 糯紮實，香氣濃郁，是越吃越涮嘴的傳統好味道。',
-      ingr: '芋頭、蝦米、油蔥酥、糯米粉、蓬萊米粉、食用油、白胡椒粉、五香粉、海鹽、糖、醬油、水。',
-      flavors: [],
-      clr: '#DDD0ED'
-    },
-    {
-      id: 3, name: '傳統蘿蔔糕', wt: '960g／條', pr: 140,
-      tag: '',
-      img: 'images/radish.jpg',
-      desc: '以新鮮白蘿蔔搭配屏東農產出品的 100% 再來米粉製作，保留蘿蔔自然清甜與米香。口感軟 Q 細緻，煎過後外層微酥、內裡柔嫩，蘿蔔香氣滿滿，每一口都吃得到樸實溫暖的傳統風味。',
-      ingr: '白蘿蔔、再來米粉、玉米粉、海鹽、白胡椒粉、水。',
-      flavors: [],
-      clr: '#EDE8DC'
-    },
-    {
-      id: 4, name: '紅豆年糕', wt: '重量確認中', pr: 130,
-      tag: '',
-      img: 'images/niangao.jpg',
-      desc: '選用台灣屏東出產的紅豆，採減糖方式製作，讓甜度更清爽不厚重。年糕中吃得到滿滿紅豆顆粒，入口 Q 糯軟香，紅豆香氣自然綿密，甜而不膩，適合喜歡傳統年節甜點的人慢慢品嚐。',
-      ingr: '屏東紅豆、糖、屏東農產出品的 100% 糯米粉。',
-      flavors: [],
-      clr: '#F2C8C8'
-    },
-    {
-      id: 5, name: '鳳梨酥', wt: '50g／個', pr: 40,
-      tag: '',
-      img: 'images/pineapple.jpg',
-      desc: '選用進口金桶奶油製作餅皮，帶出細緻奶香與酥鬆口感。外皮酥香清爽、不膩口，搭配酸甜適中的鳳梨餡，入口有奶油香、杏仁香與果香層層堆疊，是大人小孩都喜歡的經典點心。',
-      ingr: '金桶奶油、鳳梨餡〈含冬瓜〉、純糖粉、玉米粉、麵粉、純杏仁粉、蛋。',
-      flavors: [],
-      clr: '#F5DFA0'
-    },
-    {
-      id: 6, name: '蛋黃酥', wt: '重量確認中', pr: 65,
-      tag: '',
-      img: 'images/eggyolk.jpg',
-      desc: '使用進口無水奶油製作酥皮，搭配紅土鴨蛋黃與減糖烏豆沙。外皮層次酥香，入口鬆化不厚重，豆沙甜度適中，襯托出鹹蛋黃濃郁迷人的香氣。鹹甜平衡，口感細緻，是經典又耐吃的中式點心。',
-      ingr: '紅土鴨蛋、進口無水奶油、烏豆沙、黑芝麻、蛋黃液、糖粉、麵粉。',
-      flavors: [],
-      clr: '#F5C880'
-    }
-  ];
+/* ════════════════════════════════
+   商品資料（寫死，確保瞬間載入）
+   ★ 商品說明/價格若有異動請直接修改此處
+════════════════════════════════ */
+var prods = [
+  { id:1, name:'米貝果', wt:'125g／個', pr:40, tag:'全素友善', img:'images/bagel.jpg',
+    desc:'以米湯種揉入麵團中，讓貝果多了一份柔潤保濕的口感。外層帶有紮實嚼勁，入口後能感受到米香與麵香交織，Q彈不乾硬，越嚼越香，是簡單卻耐吃的日常風味。',
+    ingr:'橄欖油、海鹽、麵粉、米湯種、水、糖、酵母。', clr:'#EAD9BC',
+    defFlavors:['原味','蔓越莓','伯爵','巧克力','抹茶','黑芝麻'] },
+  { id:2, name:'芋粿巧', wt:'120g／個', pr:40, tag:'', img:'images/taro.jpg',
+    desc:'嚴選大甲芋頭，搭配蝦米、台灣油蔥酥，以及屏東農產出品的 100% 糯米粉與蓬萊米粉製作。入口先是芋頭的鬆綿香氣，接著帶出蝦米與油蔥酥的鹹香層次，口感 Q 糯紮實，香氣濃郁，是越吃越涮嘴的傳統好味道。',
+    ingr:'芋頭、蝦米、油蔥酥、糯米粉、蓬萊米粉、食用油、白胡椒粉、五香粉、海鹽、糖、醬油、水。', clr:'#DDD0ED', defFlavors:[] },
+  { id:3, name:'傳統蘿蔔糕', wt:'960g／條', pr:140, tag:'', img:'images/radish.jpg',
+    desc:'以新鮮白蘿蔔搭配屏東農產出品的 100% 再來米粉製作，保留蘿蔔自然清甜與米香。口感軟 Q 細緻，煎過後外層微酥、內裡柔嫩，蘿蔔香氣滿滿，每一口都吃得到樸實溫暖的傳統風味。',
+    ingr:'白蘿蔔、再來米粉、玉米粉、海鹽、白胡椒粉、水。', clr:'#EDE8DC', defFlavors:[] },
+  { id:4, name:'紅豆年糕', wt:'重量確認中', pr:130, tag:'', img:'images/niangao.jpg',
+    desc:'選用台灣屏東出產的紅豆，採減糖方式製作，讓甜度更清爽不厚重。年糕中吃得到滿滿紅豆顆粒，入口 Q 糯軟香，紅豆香氣自然綿密，甜而不膩，適合喜歡傳統年節甜點的人慢慢品嚐。',
+    ingr:'屏東紅豆、糖、屏東農產出品的 100% 糯米粉。', clr:'#F2C8C8', defFlavors:[] },
+  { id:5, name:'鳳梨酥', wt:'50g／個', pr:40, tag:'', img:'images/pineapple.jpg',
+    desc:'選用進口金桶奶油製作餅皮，帶出細緻奶香與酥鬆口感。外皮酥香清爽、不膩口，搭配酸甜適中的鳳梨餡，入口有奶油香、杏仁香與果香層層堆疊，是大人小孩都喜歡的經典點心。',
+    ingr:'金桶奶油、鳳梨餡〈含冬瓜〉、純糖粉、玉米粉、麵粉、純杏仁粉、蛋。', clr:'#F5DFA0', defFlavors:[] },
+  { id:6, name:'蛋黃酥', wt:'重量確認中', pr:65, tag:'', img:'images/eggyolk.jpg',
+    desc:'使用進口無水奶油製作酥皮，搭配紅土鴨蛋黃與減糖烏豆沙。外皮層次酥香，入口鬆化不厚重，豆沙甜度適中，襯托出鹹蛋黃濃郁迷人的香氣。鹹甜平衡，口感細緻，是經典又耐吃的中式點心。',
+    ingr:'紅土鴨蛋、進口無水奶油、烏豆沙、黑芝麻、蛋黃液、糖粉、麵粉。', clr:'#F5C880', defFlavors:[] }
+];
 
-  /* ────────────────────────────────
-     State
-  ──────────────────────────────── */
-  var cart = [];
-  var cur  = null;
-  var flv  = null;
-  var qty  = 1;
+/* ════════════════════════════════
+   State
+════════════════════════════════ */
+var cart     = [];
+var cur      = null;
+var flv      = null;
+var qty      = 1;
+var stockMap = {}; // { id: { active, stock, flavors:[{n,s}] } }
 
-  /* ────────────────────────────────
-     Page navigation
-  ──────────────────────────────── */
-  function go(pg) {
-    document.querySelectorAll('.pg').forEach(function(p) { p.classList.remove('on'); });
-    document.getElementById('pg-' + pg).classList.add('on');
-    window.scrollTo(0, 0);
+/* ════════════════════════════════
+   Page helpers
+════════════════════════════════ */
+function go(pg) {
+  document.querySelectorAll('.pg').forEach(function(p){ p.classList.remove('on'); });
+  document.getElementById('pg-' + pg).classList.add('on');
+  window.scrollTo(0,0);
+}
+function updCnt() {
+  document.getElementById('cnt').textContent = cart.reduce(function(s,i){ return s+i.qty; }, 0);
+}
+
+/* ════════════════════════════════
+   Stock helpers
+════════════════════════════════ */
+function parseFlavors(str) {
+  if (!str) return [];
+  return str.split('|').filter(Boolean).map(function(f) {
+    var p = f.split(':');
+    return { n: p[0], s: parseInt(p[1]) || 0 };
+  });
+}
+
+function getStockInfo(id) {
+  var sm = stockMap[id];
+  if (!sm) return null; // 尚未載入
+  if (sm.flavors && sm.flavors.length > 0) {
+    var total = sm.flavors.reduce(function(s,f){ return s+f.s; }, 0);
+    return { hasFlavors:true, total:total, flavors:sm.flavors, active:sm.active };
   }
+  return { hasFlavors:false, total:sm.stock, flavors:[], active:sm.active };
+}
 
-  function updCnt() {
-    var total = cart.reduce(function(s, i) { return s + i.qty; }, 0);
-    document.getElementById('cnt').textContent = total;
-  }
+function getFlavorStock(id, flvName) {
+  var sm = stockMap[id];
+  if (!sm || !sm.flavors) return null;
+  var f = sm.flavors.find(function(x){ return x.n === flvName; });
+  return f ? f.s : 0;
+}
 
-  /* ────────────────────────────────
-     Image helper (fallback to placeholder)
-  ──────────────────────────────── */
-  function imgOrPlaceholder(p, size) {
-    return '<img src="' + p.img + '" alt="' + p.name + '" '
-      + 'style="width:100%;height:100%;object-fit:cover;" '
-      + 'onerror="this.parentElement.innerHTML=\'<div class=pimg-placeholder>'
-      + '<em>示意圖</em><strong>' + p.name + '</strong></div>\'">';
-  }
-
-  /* ────────────────────────────────
-     Render product grid
-  ──────────────────────────────── */
-  function renderGrid() {
-    var html = prods.map(function(p) {
-      return '<div class="pcard" onclick="openProd(' + p.id + ')">'
-        + '<div class="pimg" style="background:' + p.clr + '">' + imgOrPlaceholder(p) + '</div>'
-        + '<div class="pname">' + p.name + '</div>'
-        + '<div class="pwt">' + p.wt + '</div>'
-        + '<div class="ppr">NT$ ' + p.pr + (p.flavors.length ? ' 元起' : ' 元') + '</div>'
-        + (p.tag ? '<span class="pveg">' + p.tag + '</span>' : '')
-        + '</div>';
-    }).join('');
-    document.getElementById('pgrid').innerHTML = html;
-  }
-
-  /* ────────────────────────────────
-     Open product detail
-  ──────────────────────────────── */
-  function openProd(id) {
-    cur = prods.find(function(p) { return p.id === id; });
-    flv = cur.flavors.length ? cur.flavors[0] : null;
-    qty = 1;
-
-    // Left: image
-    document.getElementById('d-img').innerHTML =
-      '<div class="dimg-box" style="background:' + cur.clr + '">'
-      + '<img src="' + cur.img + '" alt="' + cur.name + '" style="width:100%;height:100%;object-fit:cover;" '
-      + 'onerror="this.parentElement.innerHTML=\'<div style=\\\"text-align:center;padding:2rem\\\"><div style=\\\"font-size:9px;color:#9B7B65;letter-spacing:1px;margin-bottom:12px;border:1px solid rgba(92,51,23,.13);display:inline-block;padding:2px 10px;border-radius:8px\\\">示意圖</div><div style=\\\"font-family:Songti SC,Georgia,serif;font-size:28px;color:#5C3317;margin-bottom:6px\\\">' + cur.name + '</div><div style=\\\"font-size:11px;color:#9B7B65\\\">' + cur.wt + '</div></div>\'">'
-      + '</div>';
-
-    // Right: info
-    var flvHTML = '';
-    if (cur.flavors.length) {
-      var btns = cur.flavors.map(function(f) {
-        var sel = f === flv;
-        return '<button onclick="pickFlv(\'' + f + '\')" data-flv="' + f + '" '
-          + 'style="padding:8px 16px;border:2px solid #8B4513;border-radius:2px;font-size:13px;cursor:pointer;font-weight:600;font-family:inherit;transition:background .15s;'
-          + (sel ? 'background:#8B4513;color:#fff' : 'background:#fff;color:#8B4513')
-          + '">' + f + '</button>';
-      }).join('');
-      flvHTML = '<span class="flv-lbl">選擇口味</span>'
-        + '<div class="flvs" id="flv-group">' + btns + '</div>';
-    }
-
-    document.getElementById('d-info').innerHTML =
-      '<div class="dname">' + cur.name + '</div>'
-      + '<div class="dpw">'
-      +   '<span class="dpr">NT$ ' + cur.pr + '</span>'
-      +   '<span class="dwt">' + cur.wt + '</span>'
-      +   (cur.tag ? '<span class="dtag">' + cur.tag + '</span>' : '')
-      + '</div>'
-      + '<div class="ddesc">' + cur.desc + '</div>'
-      + '<div class="ingr-box">'
-      +   '<div class="ingr-title">原料成份</div>'
-      +   '<div class="ingr-text">' + cur.ingr + '</div>'
-      + '</div>'
-      + flvHTML
-      + '<span class="qty-lbl">數量</span>'
-      + '<div class="qty-row">'
-      +   '<button class="qb" onclick="chgQty(-1)">−</button>'
-      +   '<div class="qv" id="qval">' + qty + '</div>'
-      +   '<button class="qb" onclick="chgQty(1)">＋</button>'
-      + '</div>'
-      + '<button id="add-btn" onclick="addCart()" '
-      +   'onmouseover="this.style.background=\'#6B3310\'" '
-      +   'onmouseout="this.style.background=\'#8B4513\'" '
-      +   'style="width:100%;padding:16px;background:#8B4513;color:#fff;border:none;border-radius:3px;font-family:\'Songti SC\',\'STSong\',Georgia,serif;font-size:14px;letter-spacing:2px;cursor:pointer;font-weight:600;transition:background .2s">'
-      +   '加入購物車'
-      + '</button>';
-
-    go('product');
-  }
-
-  function pickFlv(f) {
-    flv = f;
-    document.querySelectorAll('#flv-group button').forEach(function(b) {
-      var sel = b.dataset.flv === f;
-      b.style.background = sel ? '#8B4513' : '#fff';
-      b.style.color       = sel ? '#fff'    : '#8B4513';
-    });
-  }
-
-  function chgQty(d) {
-    qty = Math.max(1, qty + d);
-    document.getElementById('qval').textContent = qty;
-  }
-
-  function addCart() {
-    var key = cur.id + '|' + (flv || '');
-    var ex  = cart.find(function(i) { return i.key === key; });
-    if (ex) {
-      ex.qty += qty;
-    } else {
-      cart.push({ key: key, id: cur.id, name: cur.name, flv: flv, qty: qty, pr: cur.pr, clr: cur.clr, img: cur.img });
-    }
-    updCnt();
-    var btn = document.getElementById('add-btn');
-    btn.textContent      = '✓ 已加入購物車';
-    btn.style.background = '#4A7040';
-    btn.onmouseout       = function() { this.style.background = '#4A7040'; };
-    setTimeout(function() {
-      btn.textContent      = '加入購物車';
-      btn.style.background = '#8B4513';
-      btn.onmouseout       = function() { this.style.background = '#8B4513'; };
-    }, 1600);
-  }
-
-  /* ────────────────────────────────
-     Cart
-  ──────────────────────────────── */
-  function openCart() { renderCart(); go('cart'); }
-
-  function renderCart() {
-    var total = cart.reduce(function(s, i) { return s + i.pr * i.qty; }, 0);
-    var html;
-
-    if (cart.length === 0) {
-      html = '<div class="pg-wrap" style="text-align:center;padding-top:80px">'
-        + '<div style="font-size:52px;margin-bottom:20px">🛒</div>'
-        + '<div style="font-family:\'Songti SC\',Georgia,serif;font-size:19px;color:#5C3317;margin-bottom:10px">購物車是空的</div>'
-        + '<div style="font-size:12px;color:#9B7B65;margin-bottom:36px">快去挑選喜歡的商品吧！</div>'
-        + '<button onclick="go(\'home\')" onmouseover="this.style.background=\'#6B3310\'" onmouseout="this.style.background=\'#8B4513\'" '
-        +   'style="max-width:160px;margin:0 auto;display:block;padding:13px 28px;background:#8B4513;color:#fff;border:none;border-radius:3px;font-family:\'Songti SC\',Georgia,serif;font-size:13px;letter-spacing:2px;cursor:pointer;font-weight:600;width:100%;transition:background .2s">瀏覽商品</button>'
-        + '</div>';
-    } else {
-      var items = cart.map(function(i) {
-        var thumb = '<div class="cthumb" style="background:' + i.clr + '">'
-          + '<img src="' + i.img + '" alt="' + i.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:6px" '
-          + 'onerror="this.parentElement.innerHTML=\'' + i.name[0] + '\'">'
-          + '</div>';
-        return '<div class="ci">'
-          + thumb
-          + '<div>'
-          +   '<div class="ciname">' + i.name + (i.flv ? ' · ' + i.flv : '') + '</div>'
-          +   '<div class="cisub">NT$ ' + i.pr + '／個</div>'
-          +   '<div style="display:flex;margin-top:8px">'
-          +     '<button class="qb" style="width:28px;height:28px;font-size:14px" onclick="chgCart(\'' + i.key + '\',-1)">−</button>'
-          +     '<div class="qv" style="width:36px;height:28px;font-size:13px">' + i.qty + '</div>'
-          +     '<button class="qb" style="width:28px;height:28px;font-size:14px" onclick="chgCart(\'' + i.key + '\',1)">＋</button>'
-          +   '</div>'
-          + '</div>'
-          + '<div class="cipr">NT$ ' + (i.pr * i.qty) + '</div>'
-          + '</div>';
-      }).join('');
-
-      html = '<div class="pg-wrap">'
-        + '<div class="back" onclick="go(\'home\')">← 繼續購物</div>'
-        + '<div class="pg-title">購物車</div>'
-        + items
-        + '<div class="cart-total"><span class="ctlbl">合計</span><span class="ctval">NT$ ' + total + '</span></div>'
-        + '<div class="acts">'
-        +   '<button onclick="go(\'home\')" '
-        +     'onmouseover="this.style.background=\'#8B4513\';this.style.color=\'#fff\'" '
-        +     'onmouseout="this.style.background=\'transparent\';this.style.color=\'#8B4513\'" '
-        +     'style="flex:1;padding:13px;background:transparent;color:#8B4513;border:2px solid #8B4513;border-radius:3px;font-family:inherit;font-size:12px;letter-spacing:1px;cursor:pointer;font-weight:600;transition:all .2s">繼續購物</button>'
-        +   '<button onclick="go(\'checkout\')" '
-        +     'onmouseover="this.style.background=\'#6B3310\'" '
-        +     'onmouseout="this.style.background=\'#8B4513\'" '
-        +     'style="flex:2;padding:13px;background:#8B4513;color:#fff;border:none;border-radius:3px;font-family:\'Songti SC\',Georgia,serif;font-size:13px;letter-spacing:2px;cursor:pointer;font-weight:600;transition:background .2s">前往結帳 →</button>'
-        + '</div></div>';
-    }
-    document.getElementById('cart-content').innerHTML = html;
-  }
-
-  function chgCart(key, d) {
-    var i = cart.find(function(c) { return c.key === key; });
-    if (!i) return;
-    i.qty = Math.max(0, i.qty + d);
-    if (i.qty === 0) cart = cart.filter(function(c) { return c.key !== key; });
-    updCnt();
-    renderCart();
-  }
-
-  /* ────────────────────────────────
-     Checkout → Confirm modal
-  ──────────────────────────────── */
-  function toConfirm() {
-    var n  = document.getElementById('f-name').value.trim();
-    var p  = document.getElementById('f-phone').value.trim();
-    var a  = document.getElementById('f-addr').value.trim();
-    var no = document.getElementById('f-note').value.trim();
-
-    ['f-name','f-phone','f-addr'].forEach(function(id) {
-      document.getElementById(id).classList.remove('err');
-    });
-    var valid = true;
-    if (!n) { document.getElementById('f-name').classList.add('err');  valid = false; }
-    if (!p) { document.getElementById('f-phone').classList.add('err'); valid = false; }
-    if (!a) { document.getElementById('f-addr').classList.add('err');  valid = false; }
-    if (!valid) return;
-
-    var total = cart.reduce(function(s, i) { return s + i.pr * i.qty; }, 0);
-
-    var rows = cart.map(function(i) {
-      return '<div class="crow">'
-        + '<span>' + i.name + (i.flv ? '（' + i.flv + '）' : '') + ' × ' + i.qty + '</span>'
-        + '<span>NT$ ' + (i.pr * i.qty) + '</span>'
-        + '</div>';
-    }).join('');
-
-    document.getElementById('modal-box').innerHTML =
-      '<div class="modal-title">確認訂單資訊</div>'
-      + '<div class="sec-sm">訂購人資訊</div>'
-      + '<div class="crow"><span>姓名</span><span>' + n + '</span></div>'
-      + '<div class="crow"><span>電話</span><span>' + p + '</span></div>'
-      + '<div class="crow"><span>地址</span><span style="max-width:240px">' + a + '</span></div>'
-      + (no ? '<div class="crow"><span>備註</span><span style="max-width:240px">' + no + '</span></div>' : '')
-      + '<div class="sec-sm">訂購商品</div>'
-      + rows
-      + '<div class="conf-total"><span>訂單合計</span><span>NT$ ' + total + '</span></div>'
-      + '<div class="macts">'
-      +   '<button onclick="go(\'checkout\')" '
-      +     'onmouseover="this.style.background=\'#8B4513\';this.style.color=\'#fff\'" '
-      +     'onmouseout="this.style.background=\'transparent\';this.style.color=\'#8B4513\'" '
-      +     'style="flex:1;padding:13px;background:transparent;color:#8B4513;border:2px solid #8B4513;border-radius:3px;font-family:inherit;font-size:12px;cursor:pointer;font-weight:600;transition:all .2s">返回修改</button>'
-      +   '<button onclick="doOrder()" '
-      +     'onmouseover="this.style.background=\'#6B3310\'" '
-      +     'onmouseout="this.style.background=\'#8B4513\'" '
-      +     'style="flex:2;padding:13px;background:#8B4513;color:#fff;border:none;border-radius:3px;font-family:\'Songti SC\',Georgia,serif;font-size:13px;letter-spacing:2px;cursor:pointer;font-weight:600;transition:background .2s">送出訂單</button>'
-      + '</div>';
-
-    go('confirm');
-  }
-
-  /* ────────────────────────────────
-     Submit order to GAS
-  ──────────────────────────────── */
-  function doOrder() {
-    var n  = document.getElementById('f-name').value.trim();
-    var p  = document.getElementById('f-phone').value.trim();
-    var a  = document.getElementById('f-addr').value.trim();
-    var no = document.getElementById('f-note').value.trim();
-    var total = cart.reduce(function(s, i) { return s + i.pr * i.qty; }, 0);
-    var orderNum = 'AF' + Date.now().toString().slice(-8);
-
-    var items = cart.map(function(i) {
-      return i.name + (i.flv ? '（' + i.flv + '）' : '') + ' × ' + i.qty + '  NT$' + (i.pr * i.qty);
-    }).join('\n');
-
-    var payload = {
-      token:    API_TOKEN,
-      orderNum: orderNum,
-      name:     n,
-      phone:    p,
-      address:  a,
-      items:    items,
-      total:    total,
-      note:     no
-    };
-
-    // Show loading
-    document.getElementById('loading').classList.add('on');
-
-    fetch(GAS_URL, {
-      method:  'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body:    JSON.stringify(payload)
+/* ════════════════════════════════
+   Fetch stock from GAS (background)
+════════════════════════════════ */
+function fetchStock() {
+  fetch(GAS_URL + '?action=stock&token=' + encodeURIComponent(API_TOKEN))
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d.result !== 'success') return;
+      d.data.forEach(function(item){
+        stockMap[item.id] = {
+          active:  item.active,
+          stock:   item.stock,
+          flavors: parseFlavors(item.flavors)
+        };
+      });
+      applyStockToGrid();
     })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      document.getElementById('loading').classList.remove('on');
-      if (data.result === 'success') {
-        document.getElementById('order-num').textContent = '訂單編號：' + orderNum;
-        cart = [];
-        updCnt();
-        go('success');
-      } else {
-        alert('訂單送出失敗，請稍後再試。\n錯誤：' + (data.error || '未知錯誤'));
-      }
-    })
-    .catch(function(err) {
-      document.getElementById('loading').classList.remove('on');
-      alert('網路錯誤，請確認網路連線後再試。\n' + err.message);
-    });
+    .catch(function(){}); // 靜默失敗，商品仍正常顯示
+}
+
+/* ════════════════════════════════
+   Apply stock state to rendered cards
+════════════════════════════════ */
+function applyStockToGrid() {
+  prods.forEach(function(p) {
+    var si = getStockInfo(p.id);
+    if (!si) return;
+
+    var card    = document.getElementById('pcard-' + p.id);
+    var overlay = document.getElementById('poverlay-' + p.id);
+    var badge   = document.getElementById('pbadge-' + p.id);
+    if (!card) return;
+
+    // 下架
+    if (!si.active) {
+      card.className = 'pcard sold-out-card';
+      card.onclick   = null;
+      if (overlay) { overlay.style.display='flex'; overlay.textContent='暫停供應'; }
+      if (badge)   { badge.className='pstock-zero'; badge.textContent='暫停供應'; badge.style.display='inline-block'; }
+      return;
+    }
+
+    // 售完
+    if (si.total === 0) {
+      card.className = 'pcard sold-out-card';
+      card.onclick   = null;
+      if (overlay) { overlay.style.display='flex'; overlay.textContent='售完'; }
+      if (badge)   { badge.className='pstock-zero'; badge.textContent='售完'; badge.style.display='inline-block'; }
+      return;
+    }
+
+    // 低庫存（≤5）
+    if (si.total <= 5) {
+      if (badge) { badge.className='pstock-low'; badge.textContent='僅剩 '+si.total+' 個'; badge.style.display='inline-block'; }
+    }
+  });
+}
+
+/* ════════════════════════════════
+   Render product grid
+════════════════════════════════ */
+function renderGrid() {
+  var html = prods.map(function(p) {
+    return '<div class="pcard" id="pcard-'+p.id+'" onclick="openProd('+p.id+')">'
+      + '<div class="pimg" style="background:'+p.clr+'">'
+      +   '<img src="'+p.img+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover" '
+      +     'onerror="this.parentElement.querySelector(\'.pimg-placeholder\').style.display=\'block\';this.style.display=\'none\'">'
+      +   '<div class="pimg-placeholder" style="display:none"><em>示意圖</em><strong>'+p.name+'</strong></div>'
+      +   '<div class="sold-overlay" id="poverlay-'+p.id+'" style="display:none"></div>'
+      + '</div>'
+      + '<div class="pname">'+p.name+'</div>'
+      + '<div class="pwt">'+p.wt+'</div>'
+      + '<div class="ppr">NT$ '+p.pr+(p.defFlavors.length?' 元起':' 元')+'</div>'
+      + (p.tag ? '<span class="pveg">'+p.tag+'</span>' : '')
+      + '<span class="pstock-low" id="pbadge-'+p.id+'" style="display:none"></span>'
+      + '</div>';
+  }).join('');
+  document.getElementById('pgrid').innerHTML = html;
+}
+
+/* ════════════════════════════════
+   Open product detail
+════════════════════════════════ */
+function openProd(id) {
+  cur = prods.find(function(p){ return p.id===id; });
+  var si = getStockInfo(id);
+
+  // 若下架或售完，不開啟
+  if (si && (!si.active || si.total === 0)) return;
+
+  // 決定口味清單（從 stockMap 或預設）
+  var activeFlavors = [];
+  if (cur.defFlavors.length) {
+    if (si && si.flavors.length) {
+      activeFlavors = si.flavors; // 有庫存資料就用 GAS 資料
+    } else {
+      activeFlavors = cur.defFlavors.map(function(n){ return {n:n, s:null}; }); // 尚未載入
+    }
   }
 
-  /* ────────────────────────────────
-     Init
-  ──────────────────────────────── */
-  renderGrid();
+  flv = activeFlavors.length ? activeFlavors[0].n : null;
+  qty = 1;
+
+  // Left: image
+  document.getElementById('d-img').innerHTML =
+    '<div class="dimg-box" style="background:'+cur.clr+'">'
+    + '<img src="'+cur.img+'" alt="'+cur.name+'" style="width:100%;height:100%;object-fit:cover" '
+    + 'onerror="this.style.display=\'none\';this.parentElement.innerHTML+=\'<div style=\\\"text-align:center;padding:2rem\\\"><div style=\\\"font-family:Songti SC,Georgia,serif;font-size:28px;color:#5C3317\\\">'+cur.name+'</div></div>\'">'
+    + '</div>';
+
+  // Right: info
+  var stockInfoHTML = '';
+  if (si) {
+    if (!activeFlavors.length) {
+      if      (si.total === 0)      stockInfoHTML = '<div class="d-stock-info d-stock-zero">⚠ 目前已售完</div>';
+      else if (si.total <= 5)  stockInfoHTML = '<div class="d-stock-info d-stock-low">庫存僅剩 '+si.total+' 個</div>';
+    }
+  }
+
+  var flvHTML = '';
+  if (activeFlavors.length) {
+    var btns = activeFlavors.map(function(f) {
+      var s = f.s; // null = 尚未載入
+      var soldOut = (s !== null && s === 0);
+      var lowTxt  = (s !== null && s > 0 && s <= 5) ? ' <small style="opacity:.7">('+s+')</small>' : '';
+      var style   = soldOut
+        ? 'padding:8px 16px;border:2px solid #D9C9B2;border-radius:2px;font-size:13px;cursor:not-allowed;font-weight:600;font-family:inherit;background:#F7EFE3;color:#C49A6C;text-decoration:line-through'
+        : (f.n===flv
+          ? 'padding:8px 16px;border:2px solid #8B4513;border-radius:2px;font-size:13px;cursor:pointer;font-weight:600;font-family:inherit;background:#8B4513;color:#fff'
+          : 'padding:8px 16px;border:2px solid #8B4513;border-radius:2px;font-size:13px;cursor:pointer;font-weight:600;font-family:inherit;background:#fff;color:#8B4513');
+      return '<button'+(soldOut?' disabled':' onclick="pickFlv(\''+f.n+'\')"')+' data-flv="'+f.n+'" style="'+style+'">'+f.n+lowTxt+'</button>';
+    }).join('');
+    flvHTML = '<span class="flv-lbl">選擇口味</span><div class="flvs" id="flv-group">'+btns+'</div>';
+  }
+
+  document.getElementById('d-info').innerHTML =
+    '<div class="dname">'+cur.name+'</div>'
+    +'<div class="dpw"><span class="dpr">NT$ '+cur.pr+'</span><span class="dwt">'+cur.wt+'</span>'+(cur.tag?'<span class="dtag">'+cur.tag+'</span>':'')+'</div>'
+    +stockInfoHTML
+    +'<div class="ddesc">'+cur.desc+'</div>'
+    +'<div class="ingr-box"><div class="ingr-title">原料成份</div><div class="ingr-text">'+cur.ingr+'</div></div>'
+    +flvHTML
+    +'<span class="qty-lbl">數量</span>'
+    +'<div class="qty-row"><button class="qb" onclick="chgQty(-1)">−</button><div class="qv" id="qval">'+qty+'</div><button class="qb" onclick="chgQty(1)">＋</button></div>'
+    +'<button id="add-btn" onclick="addCart()" onmouseover="this.style.background=\'#6B3310\'" onmouseout="this.style.background=\'#8B4513\'" '
+    +'style="width:100%;padding:16px;background:#8B4513;color:#fff;border:none;border-radius:3px;font-family:\'Songti SC\',\'STSong\',Georgia,serif;font-size:14px;letter-spacing:2px;cursor:pointer;font-weight:600;transition:background .2s">加入購物車</button>';
+
+  go('product');
+}
+
+function pickFlv(f) {
+  flv = f;
+  document.querySelectorAll('#flv-group button:not([disabled])').forEach(function(b){
+    var sel = b.dataset.flv === f;
+    b.style.background = sel ? '#8B4513' : '#fff';
+    b.style.color       = sel ? '#fff'    : '#8B4513';
+  });
+  // 更新庫存提示
+  var s = getFlavorStock(cur.id, f);
+  var existingTip = document.getElementById('flv-stock-tip');
+  if (existingTip) existingTip.remove();
+  if (s !== null && s > 0 && s <= 5) {
+    var tip = document.createElement('div');
+    tip.id = 'flv-stock-tip';
+    tip.className = 'd-stock-info d-stock-low';
+    tip.textContent = '此口味僅剩 ' + s + ' 個';
+    document.getElementById('flv-group').after(tip);
+  }
+}
+
+function chgQty(d) {
+  // 不超過庫存上限
+  var maxStock = 99;
+  if (flv) {
+    var fs = getFlavorStock(cur.id, flv);
+    if (fs !== null) maxStock = fs;
+  } else {
+    var si = getStockInfo(cur.id);
+    if (si) maxStock = si.total;
+  }
+  qty = Math.max(1, Math.min(qty + d, maxStock));
+  document.getElementById('qval').textContent = qty;
+}
+
+function addCart() {
+  // 庫存再驗一次
+  var available = 99;
+  if (flv) {
+    var fs = getFlavorStock(cur.id, flv);
+    if (fs !== null) available = fs;
+  } else {
+    var si = getStockInfo(cur.id);
+    if (si) available = si.total;
+  }
+  if (qty > available) {
+    alert('抱歉，庫存不足！此品項目前僅剩 ' + available + ' 個。');
+    return;
+  }
+
+  var key = cur.id + '|' + (flv||'');
+  var ex  = cart.find(function(i){ return i.key===key; });
+
+  // 已在購物車的數量加上本次不超過庫存
+  var alreadyInCart = ex ? ex.qty : 0;
+  if (alreadyInCart + qty > available) {
+    alert('購物車已有 '+alreadyInCart+' 個，加上本次超過庫存（'+available+'個）。');
+    return;
+  }
+
+  if (ex) { ex.qty += qty; }
+  else { cart.push({ key:key, id:cur.id, name:cur.name, flv:flv, qty:qty, pr:cur.pr, clr:cur.clr, img:cur.img }); }
+
+  updCnt();
+  var btn = document.getElementById('add-btn');
+  btn.textContent='✓ 已加入購物車'; btn.style.background='#4A7040';
+  btn.onmouseout=function(){ this.style.background='#4A7040'; };
+  setTimeout(function(){
+    btn.textContent='加入購物車'; btn.style.background='#8B4513';
+    btn.onmouseout=function(){ this.style.background='#8B4513'; };
+  }, 1600);
+}
+
+/* ════════════════════════════════
+   Cart
+════════════════════════════════ */
+function openCart(){ renderCart(); go('cart'); }
+
+function renderCart() {
+  var total = cart.reduce(function(s,i){ return s+i.pr*i.qty; }, 0);
+  var html;
+  if (cart.length === 0) {
+    html='<div class="pg-wrap" style="text-align:center;padding-top:80px">'
+      +'<div style="font-size:52px;margin-bottom:20px">🛒</div>'
+      +'<div style="font-family:\'Songti SC\',Georgia,serif;font-size:19px;color:#5C3317;margin-bottom:10px">購物車是空的</div>'
+      +'<div style="font-size:12px;color:#9B7B65;margin-bottom:36px">快去挑選喜歡的商品吧！</div>'
+      +'<button onclick="go(\'home\')" onmouseover="this.style.background=\'#6B3310\'" onmouseout="this.style.background=\'#8B4513\'" style="max-width:160px;margin:0 auto;display:block;padding:13px 28px;background:#8B4513;color:#fff;border:none;border-radius:3px;font-family:\'Songti SC\',Georgia,serif;font-size:13px;letter-spacing:2px;cursor:pointer;font-weight:600;width:100%;transition:background .2s">瀏覽商品</button></div>';
+  } else {
+    var items = cart.map(function(i){
+      return '<div class="ci">'
+        +'<div class="cthumb" style="background:'+i.clr+'">'
+        +'<img src="'+i.img+'" alt="'+i.name+'" style="width:100%;height:100%;object-fit:cover;border-radius:6px" onerror="this.parentElement.textContent=\''+i.name[0]+'\'">'
+        +'</div>'
+        +'<div><div class="ciname">'+i.name+(i.flv?' · '+i.flv:'')+'</div><div class="cisub">NT$ '+i.pr+'／個</div>'
+        +'<div style="display:flex;margin-top:8px">'
+        +'<button class="qb" style="width:28px;height:28px;font-size:14px" onclick="chgCart(\''+i.key+'\',-1)">−</button>'
+        +'<div class="qv" style="width:36px;height:28px;font-size:13px">'+i.qty+'</div>'
+        +'<button class="qb" style="width:28px;height:28px;font-size:14px" onclick="chgCart(\''+i.key+'\',1)">＋</button>'
+        +'</div></div>'
+        +'<div class="cipr">NT$ '+(i.pr*i.qty)+'</div></div>';
+    }).join('');
+    html='<div class="pg-wrap"><div class="back" onclick="go(\'home\')">← 繼續購物</div><div class="pg-title">購物車</div>'
+      +items
+      +'<div class="cart-total"><span class="ctlbl">合計</span><span class="ctval">NT$ '+total+'</span></div>'
+      +'<div class="acts">'
+      +'<button onclick="go(\'home\')" onmouseover="this.style.background=\'#8B4513\';this.style.color=\'#fff\'" onmouseout="this.style.background=\'transparent\';this.style.color=\'#8B4513\'" style="flex:1;padding:13px;background:transparent;color:#8B4513;border:2px solid #8B4513;border-radius:3px;font-family:inherit;font-size:12px;letter-spacing:1px;cursor:pointer;font-weight:600;transition:all .2s">繼續購物</button>'
+      +'<button onclick="go(\'checkout\')" onmouseover="this.style.background=\'#6B3310\'" onmouseout="this.style.background=\'#8B4513\'" style="flex:2;padding:13px;background:#8B4513;color:#fff;border:none;border-radius:3px;font-family:\'Songti SC\',Georgia,serif;font-size:13px;letter-spacing:2px;cursor:pointer;font-weight:600;transition:background .2s">前往結帳 →</button>'
+      +'</div></div>';
+  }
+  document.getElementById('cart-content').innerHTML = html;
+}
+
+function chgCart(key, d) {
+  var i = cart.find(function(c){ return c.key===key; });
+  if (!i) return;
+  i.qty = Math.max(0, i.qty+d);
+  if (i.qty===0) cart = cart.filter(function(c){ return c.key!==key; });
+  updCnt(); renderCart();
+}
+
+/* ════════════════════════════════
+   Checkout
+════════════════════════════════ */
+function toConfirm() {
+  var n  = document.getElementById('f-name').value.trim();
+  var p  = document.getElementById('f-phone').value.trim();
+  var a  = document.getElementById('f-addr').value.trim();
+  var no = document.getElementById('f-note').value.trim();
+  ['f-name','f-phone','f-addr'].forEach(function(id){ document.getElementById(id).classList.remove('err'); });
+  var ok = true;
+  if (!n){ document.getElementById('f-name').classList.add('err');  ok=false; }
+  if (!p){ document.getElementById('f-phone').classList.add('err'); ok=false; }
+  if (!a){ document.getElementById('f-addr').classList.add('err');  ok=false; }
+  if (!ok) return;
+
+  var total = cart.reduce(function(s,i){ return s+i.pr*i.qty; }, 0);
+  var rows  = cart.map(function(i){
+    return '<div class="crow"><span>'+i.name+(i.flv?'（'+i.flv+'）':'')+' × '+i.qty+'</span><span>NT$ '+(i.pr*i.qty)+'</span></div>';
+  }).join('');
+
+  document.getElementById('modal-box').innerHTML =
+    '<div class="modal-title">確認訂單資訊</div>'
+    +'<div class="sec-sm">訂購人資訊</div>'
+    +'<div class="crow"><span>姓名</span><span>'+n+'</span></div>'
+    +'<div class="crow"><span>電話</span><span>'+p+'</span></div>'
+    +'<div class="crow"><span>地址</span><span style="max-width:240px">'+a+'</span></div>'
+    +(no?'<div class="crow"><span>備註</span><span style="max-width:240px">'+no+'</span></div>':'')
+    +'<div class="sec-sm">訂購商品</div>'+rows
+    +'<div class="conf-total"><span>訂單合計</span><span>NT$ '+total+'</span></div>'
+    +'<div class="macts">'
+    +'<button onclick="go(\'checkout\')" onmouseover="this.style.background=\'#8B4513\';this.style.color=\'#fff\'" onmouseout="this.style.background=\'transparent\';this.style.color=\'#8B4513\'" style="flex:1;padding:13px;background:transparent;color:#8B4513;border:2px solid #8B4513;border-radius:3px;font-family:inherit;font-size:12px;cursor:pointer;font-weight:600;transition:all .2s">返回修改</button>'
+    +'<button onclick="doOrder()" onmouseover="this.style.background=\'#6B3310\'" onmouseout="this.style.background=\'#8B4513\'" style="flex:2;padding:13px;background:#8B4513;color:#fff;border:none;border-radius:3px;font-family:\'Songti SC\',Georgia,serif;font-size:13px;letter-spacing:2px;cursor:pointer;font-weight:600;transition:background .2s">送出訂單</button>'
+    +'</div>';
+  go('confirm');
+}
+
+/* ════════════════════════════════
+   Submit Order
+════════════════════════════════ */
+function doOrder() {
+  var n  = document.getElementById('f-name').value.trim();
+  var p  = document.getElementById('f-phone').value.trim();
+  var a  = document.getElementById('f-addr').value.trim();
+  var no = document.getElementById('f-note').value.trim();
+  var total    = cart.reduce(function(s,i){ return s+i.pr*i.qty; }, 0);
+  var orderNum = 'AF' + Date.now().toString().slice(-8);
+
+  var itemsText = cart.map(function(i){
+    return i.name+(i.flv?'（'+i.flv+'）':'')+' × '+i.qty+'  NT$'+(i.pr*i.qty);
+  }).join('\n');
+
+  var cartItems = cart.map(function(i){
+    return { id:i.id, name:i.name, flv:i.flv||'', qty:i.qty };
+  });
+
+  var payload = {
+    action: 'order', token: API_TOKEN,
+    orderNum: orderNum, name: n, phone: p, address: a,
+    items: itemsText, total: total, note: no,
+    cartItems: cartItems
+  };
+
+  document.getElementById('loading-txt').textContent = '訂單送出中…';
+  document.getElementById('loading').classList.add('on');
+
+  fetch(GAS_URL, {
+    method:  'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body:    JSON.stringify(payload)
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    document.getElementById('loading').classList.remove('on');
+    if (d.result === 'success') {
+      document.getElementById('order-num').textContent = '訂單編號：' + orderNum;
+      cart = []; updCnt();
+      // 重新拉庫存讓顯示同步
+      fetchStock();
+      go('success');
+    } else {
+      alert('訂單送出失敗：\n' + (d.error || '未知錯誤'));
+    }
+  })
+  .catch(function(err){
+    document.getElementById('loading').classList.remove('on');
+    alert('網路錯誤，請確認連線後再試。\n' + err.message);
+  });
+}
+
+/* ════════════════════════════════
+   Init
+════════════════════════════════ */
+renderGrid();
+fetchStock(); // 背景讀庫存，商品卡片已先顯示
 </script>
 </body>
 </html>
