@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阿芳師後台管理</title>
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'PingFang TC','Microsoft JhengHei',sans-serif; background:#F7EFE3; color:#3A2010; min-height:100vh; }
+    input, textarea, select { font-family:inherit; }
+
+    /* ── Header ── */
+    header {
+      background:#5C3317; color:#fff;
+      padding:0 2rem; height:56px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .hlogo { font-family:'Songti SC',Georgia,serif; font-size:16px; letter-spacing:3px; }
+    .hlogo span { font-size:11px; color:rgba(255,255,255,.6); letter-spacing:2px; margin-left:8px; }
+    .logout-btn {
+      background:rgba(255,255,255,.15); color:#fff; border:1px solid rgba(255,255,255,.3);
+      padding:6px 16px; border-radius:16px; font-size:12px; cursor:pointer;
+      transition:background .2s;
+    }
+    .logout-btn:hover { background:rgba(255,255,255,.25); }
+
+    /* ── Login ── */
+    .login-wrap {
+      max-width:360px; margin:100px auto; padding:2rem;
+      background:#FDFAF6; border-radius:8px;
+      box-shadow:0 8px 32px rgba(92,51,23,.12);
+    }
+    .login-wrap h2 {
+      font-family:'Songti SC',Georgia,serif; font-size:20px; color:#5C3317;
+      margin-bottom:6px;
+    }
+    .login-wrap p { font-size:12px; color:#9B7B65; margin-bottom:28px; }
+    .flabel { font-size:9px; letter-spacing:2px; color:#9B7B65; display:block; margin-bottom:8px; text-transform:uppercase; }
+    .finput {
+      width:100%; padding:11px 13px; border:1px solid rgba(92,51,23,.18);
+      border-radius:3px; background:#fff; font-size:14px; color:#3A2010;
+      outline:none; transition:border-color .2s;
+    }
+    .finput:focus { border-color:#8B4513; }
+    .finput.err { border-color:#B54020; }
+
+    /* ── Buttons ── */
+    .btn-pri {
+      background:#8B4513; color:#fff; border:none; border-radius:3px;
+      padding:12px 24px; font-size:13px; letter-spacing:1px; cursor:pointer;
+      font-family:'Songti SC',Georgia,serif; font-weight:600;
+      transition:background .2s; display:inline-block;
+    }
+    .btn-pri:hover { background:#6B3310; }
+    .btn-sec {
+      background:transparent; color:#8B4513; border:1.5px solid #8B4513;
+      border-radius:3px; padding:11px 20px; font-size:13px; cursor:pointer;
+      font-family:inherit; font-weight:600; transition:all .2s;
+    }
+    .btn-sec:hover { background:#8B4513; color:#fff; }
+    .btn-sm {
+      background:#8B4513; color:#fff; border:none; border-radius:3px;
+      padding:6px 14px; font-size:12px; cursor:pointer; font-weight:600;
+      transition:background .2s;
+    }
+    .btn-sm:hover { background:#6B3310; }
+    .btn-sm.danger { background:#B54020; }
+    .btn-sm.danger:hover { background:#8B2010; }
+    .btn-sm.ghost { background:transparent; color:#8B4513; border:1.5px solid #8B4513; }
+    .btn-sm.ghost:hover { background:#8B4513; color:#fff; }
+
+    /* ── Main layout ── */
+    .main { max-width:960px; margin:0 auto; padding:36px 2rem 72px; }
+    .page-title {
+      font-family:'Songti SC',Georgia,serif; font-size:22px; color:#5C3317;
+      margin-bottom:6px;
+    }
+    .page-sub { font-size:11px; color:#9B7B65; letter-spacing:2px; margin-bottom:32px; }
+
+    /* ── Toolbar ── */
+    .toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+
+    /* ── Product Table ── */
+    .prod-table { width:100%; border-collapse:collapse; background:#FDFAF6; border-radius:6px; overflow:hidden; box-shadow:0 2px 12px rgba(92,51,23,.08); }
+    .prod-table thead th {
+      background:#EDE0CF; color:#5C3317; font-size:11px; letter-spacing:1.5px;
+      text-align:left; padding:12px 14px; font-weight:600; text-transform:uppercase;
+    }
+    .prod-table tbody tr { border-bottom:1px solid rgba(92,51,23,.07); transition:background .15s; }
+    .prod-table tbody tr:hover { background:#FDF7F0; }
+    .prod-table tbody tr.inactive { opacity:.5; }
+    .prod-table td { padding:14px; font-size:13px; vertical-align:middle; }
+    .prod-thumb {
+      width:48px; height:48px; border-radius:6px; overflow:hidden;
+      display:inline-flex; align-items:center; justify-content:center;
+      font-family:'Songti SC',Georgia,serif; font-size:14px; color:#5C3317;
+    }
+    .prod-thumb img { width:100%; height:100%; object-fit:cover; }
+    .prod-name { font-family:'Songti SC',Georgia,serif; font-size:14px; font-weight:500; }
+    .stock-badge {
+      display:inline-block; padding:3px 10px; border-radius:10px;
+      font-size:11px; font-weight:600;
+    }
+    .stock-ok   { background:#E8F0E0; color:#4A7040; }
+    .stock-low  { background:#FFF3E0; color:#E65100; }
+    .stock-zero { background:#FFE0E0; color:#B54020; }
+
+    /* ── Toggle switch ── */
+    .toggle { position:relative; display:inline-block; width:44px; height:24px; }
+    .toggle input { opacity:0; width:0; height:0; }
+    .slider {
+      position:absolute; cursor:pointer; inset:0;
+      background:#D9C9B2; border-radius:24px; transition:.3s;
+    }
+    .slider::before {
+      content:''; position:absolute;
+      width:18px; height:18px; left:3px; bottom:3px;
+      background:#fff; border-radius:50%; transition:.3s;
+      box-shadow:0 1px 4px rgba(0,0,0,.2);
+    }
+    input:checked + .slider { background:#8B4513; }
+    input:checked + .slider::before { transform:translateX(20px); }
+
+    /* ── Modal ── */
+    .modal-bg {
+      display:none; position:fixed; inset:0; z-index:200;
+      background:rgba(20,10,4,.65); align-items:center; justify-content:center; padding:1rem;
+    }
+    .modal-bg.on { display:flex; }
+    .modal {
+      background:#FDFAF6; border-radius:8px; padding:32px;
+      max-width:560px; width:100%; max-height:90vh; overflow-y:auto;
+      box-shadow:0 20px 60px rgba(0,0,0,.3);
+    }
+    .modal-title {
+      font-family:'Songti SC',Georgia,serif; font-size:18px; color:#5C3317;
+      margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid rgba(92,51,23,.13);
+    }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+    .form-row.full { grid-template-columns:1fr; }
+    .fg { margin-bottom:14px; }
+    textarea.finput { height:80px; resize:none; line-height:1.7; }
+    .modal-actions { display:flex; gap:12px; margin-top:24px; justify-content:flex-end; }
+
+    /* ── Flavor manager ── */
+    .flavor-section { margin-top:4px; }
+    .flavor-section h4 { font-size:11px; letter-spacing:2px; color:#9B7B65; text-transform:uppercase; margin-bottom:12px; }
+    .flavor-row {
+      display:flex; align-items:center; gap:8px; margin-bottom:8px;
+    }
+    .flavor-row input[type=text]  { flex:2; }
+    .flavor-row input[type=number]{ flex:1; }
+    .has-flavor-toggle { display:flex; align-items:center; gap:10px; margin-bottom:16px; font-size:13px; color:#5C3317; }
+
+    /* ── Loading / Toast ── */
+    .toast {
+      position:fixed; bottom:28px; left:50%; transform:translateX(-50%);
+      background:#3A2010; color:#fff; padding:12px 24px; border-radius:20px;
+      font-size:13px; letter-spacing:.5px; z-index:300; opacity:0;
+      transition:opacity .3s; pointer-events:none;
+    }
+    .toast.on { opacity:1; }
+    .spinner-sm { width:16px; height:16px; border:2px solid #EDE0CF; border-top-color:#8B4513; border-radius:50%; animation:spin .8s linear infinite; display:inline-block; vertical-align:middle; margin-right:6px; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    /* ── Responsive ── */
+    @media(max-width:640px) {
+      .form-row { grid-template-columns:1fr; }
+      .modal { padding:24px 18px; }
+      .main { padding:24px 1rem 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ Header ══ -->
+<header>
+  <div class="hlogo">阿芳師<span>ADMIN</span></div>
+  <button class="logout-btn" id="logout-btn" onclick="logout()" style="display:none">登出</button>
+</header>
+
+<!-- ══ Login ══ -->
+<div id="pg-login">
+  <div class="login-wrap">
+    <h2>管理員登入</h2>
+    <p>請輸入後台管理密碼</p>
+    <div class="fg">
+      <label class="flabel">管理員密碼</label>
+      <input class="finput" id="pw-input" type="password" placeholder="請輸入密碼"
+        onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div id="login-err" style="font-size:12px;color:#B54020;margin-bottom:14px;display:none">密碼錯誤，請重試</div>
+    <button class="btn-pri" style="width:100%" onclick="doLogin()">登入</button>
+  </div>
+</div>
+
+<!-- ══ Admin Main ══ -->
+<div id="pg-admin" style="display:none">
+  <div class="main">
+    <div class="page-title">商品管理</div>
+    <div class="page-sub">PRODUCT MANAGEMENT</div>
+
+    <div class="toolbar">
+      <div style="font-size:13px;color:#9B7B65" id="prod-count"></div>
+      <button class="btn-pri" onclick="openModal(null)">＋ 新增商品</button>
+    </div>
+
+    <div id="table-wrap">
+      <div style="text-align:center;padding:48px;color:#9B7B65;font-size:13px">
+        <span class="spinner-sm"></span>讀取商品中…
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ Edit Modal ══ -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <div class="modal-title" id="modal-title">新增商品</div>
+    <input type="hidden" id="m-id">
+
+    <div class="form-row">
+      <div class="fg">
+        <label class="flabel">商品名稱 *</label>
+        <input class="finput" id="m-name" type="text" placeholder="米貝果">
+      </div>
+      <div class="fg">
+        <label class="flabel">重量</label>
+        <input class="finput" id="m-wt" type="text" placeholder="125g／個">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="fg">
+        <label class="flabel">價格（NT$） *</label>
+        <input class="finput" id="m-pr" type="number" placeholder="40">
+      </div>
+      <div class="fg">
+        <label class="flabel">標籤（選填）</label>
+        <input class="finput" id="m-tag" type="text" placeholder="全素友善">
+      </div>
+    </div>
+
+    <div class="fg form-row full">
+      <div>
+        <label class="flabel">圖片路徑</label>
+        <input class="finput" id="m-img" type="text" placeholder="images/bagel.jpg">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="fg">
+        <label class="flabel">佔位背景色</label>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input class="finput" id="m-clr" type="text" placeholder="#EAD9BC" style="flex:1">
+          <input type="color" id="m-clr-picker" value="#EAD9BC"
+            oninput="document.getElementById('m-clr').value=this.value"
+            style="width:40px;height:40px;border:1px solid rgba(92,51,23,.2);border-radius:3px;cursor:pointer;padding:2px">
+        </div>
+      </div>
+      <div class="fg">
+        <label class="flabel">是否上架</label>
+        <div style="margin-top:8px">
+          <label class="toggle">
+            <input type="checkbox" id="m-active" checked>
+            <span class="slider"></span>
+          </label>
+          <span id="m-active-label" style="font-size:13px;color:#5C3317;margin-left:10px;vertical-align:middle">上架中</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label class="flabel">商品說明</label>
+      <textarea class="finput" id="m-desc" placeholder="商品描述文字…"></textarea>
+    </div>
+
+    <div class="fg">
+      <label class="flabel">原料成份</label>
+      <textarea class="finput" id="m-ingr" placeholder="原料 A、原料 B…"></textarea>
+    </div>
+
+    <!-- 庫存管理 -->
+    <div style="border-top:1px solid rgba(92,51,23,.1);margin:16px 0 20px;padding-top:20px">
+      <div class="has-flavor-toggle">
+        <label class="toggle">
+          <input type="checkbox" id="m-has-flavors" onchange="toggleFlavorMode()">
+          <span class="slider"></span>
+        </label>
+        <span>此商品有多種口味（各口味獨立庫存）</span>
+      </div>
+
+      <!-- 無口味：單一庫存 -->
+      <div id="simple-stock-section">
+        <div class="fg">
+          <label class="flabel">庫存數量</label>
+          <input class="finput" id="m-stock" type="number" min="0" placeholder="0">
+        </div>
+      </div>
+
+      <!-- 有口味：口味列表 -->
+      <div id="flavor-stock-section" style="display:none">
+        <div class="flavor-section">
+          <h4>口味與庫存</h4>
+          <div id="flavor-list"></div>
+          <button class="btn-sm ghost" onclick="addFlavorRow()" style="margin-top:4px">＋ 新增口味</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-sec" onclick="closeModal()">取消</button>
+      <button class="btn-pri" onclick="saveProduct()">儲存商品</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ Toast ══ -->
+<div class="toast" id="toast"></div>
+
+<script>
+  /* ────────────────────────────────
+     ★ 設定區
+  ──────────────────────────────── */
+  var GAS_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+
+  /* ────────────────────────────────
+     State
+  ──────────────────────────────── */
+  var adminToken = '';
+  var allProds   = [];
+
+  /* ────────────────────────────────
+     Login / Logout
+  ──────────────────────────────── */
+  window.onload = function() {
+    var saved = sessionStorage.getItem('afang_admin');
+    if (saved) { adminToken = saved; showAdmin(); }
+
+    document.getElementById('m-active').addEventListener('change', function() {
+      document.getElementById('m-active-label').textContent = this.checked ? '上架中' : '已下架';
+    });
+  };
+
+  function doLogin() {
+    var pw = document.getElementById('pw-input').value.trim();
+    if (!pw) return;
+    document.getElementById('login-err').style.display = 'none';
+
+    // Verify token with GAS health check
+    fetch(GAS_URL + '?token=' + encodeURIComponent(pw) + '&action=allproducts', { method:'GET' })
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d.result === 'success' || (d.result === 'error' && d.error !== 'Unauthorized')) {
+          // Valid admin token
+          adminToken = pw;
+          sessionStorage.setItem('afang_admin', pw);
+          showAdmin();
+          loadProducts();
+        } else {
+          document.getElementById('login-err').style.display = 'block';
+        }
+      })
+      .catch(function() {
+        // Try anyway - network might work but CORS issues in preview
+        adminToken = pw;
+        sessionStorage.setItem('afang_admin', pw);
+        showAdmin();
+        loadProducts();
+      });
+  }
+
+  function logout() {
+    sessionStorage.removeItem('afang_admin');
+    adminToken = '';
+    document.getElementById('pg-admin').style.display = 'none';
+    document.getElementById('pg-login').style.display = 'block';
+    document.getElementById('logout-btn').style.display = 'none';
+    document.getElementById('pw-input').value = '';
+  }
+
+  function showAdmin() {
+    document.getElementById('pg-login').style.display = 'none';
+    document.getElementById('pg-admin').style.display = 'block';
+    document.getElementById('logout-btn').style.display = 'block';
+  }
+
+  /* ────────────────────────────────
+     Load Products
+  ──────────────────────────────── */
+  function loadProducts() {
+    document.getElementById('table-wrap').innerHTML =
+      '<div style="text-align:center;padding:48px;color:#9B7B65;font-size:13px"><span class="spinner-sm"></span>讀取商品中…</div>';
+
+    fetch(GAS_URL + '?action=allproducts&token=' + encodeURIComponent(adminToken))
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d.result === 'success') {
+          allProds = d.data;
+          renderTable();
+        } else {
+          showErr('讀取失敗：' + d.error);
+        }
+      })
+      .catch(function(e) { showErr('網路錯誤：' + e.message); });
+  }
+
+  function showErr(msg) {
+    document.getElementById('table-wrap').innerHTML =
+      '<div style="text-align:center;padding:48px;color:#B54020;font-size:13px">' + msg + '</div>';
+  }
+
+  /* ────────────────────────────────
+     Render Table
+  ──────────────────────────────── */
+  function renderTable() {
+    document.getElementById('prod-count').textContent =
+      '共 ' + allProds.length + ' 項商品，上架 ' + allProds.filter(function(p){ return p.active; }).length + ' 項';
+
+    var rows = allProds.map(function(p) {
+      var stockInfo = getStockInfo(p);
+      var badgeCls  = stockInfo.total === 0 ? 'stock-zero' : stockInfo.total <= 5 ? 'stock-low' : 'stock-ok';
+      var badgeTxt  = stockInfo.hasFlavors ? '多口味 共' + stockInfo.total + '個' : stockInfo.total + ' 個';
+
+      return '<tr class="' + (p.active ? '' : 'inactive') + '" id="tr-' + p.id + '">'
+        + '<td><div class="prod-thumb" style="background:' + p.clr + '">'
+        +   '<img src="' + p.img + '" alt="' + p.name + '" onerror="this.style.display=\'none\'">'
+        + '</div></td>'
+        + '<td><div class="prod-name">' + p.name + '</div>'
+        +   (p.tag ? '<div style="font-size:10px;color:#4A7040;margin-top:3px">' + p.tag + '</div>' : '')
+        + '</td>'
+        + '<td>NT$ ' + p.pr + '</td>'
+        + '<td><span class="stock-badge ' + badgeCls + '">' + badgeTxt + '</span></td>'
+        + '<td>'
+        +   '<label class="toggle">'
+        +     '<input type="checkbox" ' + (p.active ? 'checked' : '') + ' onchange="toggleActive(' + p.id + ',this)">'
+        +     '<span class="slider"></span>'
+        +   '</label>'
+        + '</td>'
+        + '<td><button class="btn-sm" onclick="openModal(' + p.id + ')">編輯</button></td>'
+        + '</tr>';
+    }).join('');
+
+    document.getElementById('table-wrap').innerHTML =
+      '<table class="prod-table">'
+      + '<thead><tr>'
+      +   '<th>圖片</th><th>商品名稱</th><th>價格</th><th>庫存</th><th>上架</th><th>操作</th>'
+      + '</tr></thead>'
+      + '<tbody>' + rows + '</tbody>'
+      + '</table>';
+  }
+
+  function getStockInfo(p) {
+    if (p.flavors) {
+      var fs = parseFlavors(p.flavors);
+      var total = fs.reduce(function(s, f){ return s + f.s; }, 0);
+      return { hasFlavors: true, total: total, flavors: fs };
+    }
+    return { hasFlavors: false, total: p.stock || 0, flavors: [] };
+  }
+
+  /* ────────────────────────────────
+     Toggle Active
+  ──────────────────────────────── */
+  function toggleActive(id, el) {
+    var newVal = el.checked;
+    gasPost({ action:'toggleActive', token:adminToken, id:id })
+      .then(function(d) {
+        if (d.result === 'success') {
+          var p = allProds.find(function(x){ return x.id === id; });
+          if (p) p.active = newVal;
+          var tr = document.getElementById('tr-' + id);
+          if (tr) tr.className = newVal ? '' : 'inactive';
+          toast(newVal ? '✓ 已上架' : '已下架');
+        } else {
+          el.checked = !newVal;
+          toast('操作失敗：' + d.error);
+        }
+      });
+  }
+
+  /* ────────────────────────────────
+     Open / Close Modal
+  ──────────────────────────────── */
+  function openModal(id) {
+    var p = id ? allProds.find(function(x){ return x.id === id; }) : null;
+
+    document.getElementById('modal-title').textContent = p ? '編輯商品' : '新增商品';
+    document.getElementById('m-id').value    = p ? p.id : '';
+    document.getElementById('m-name').value  = p ? p.name  : '';
+    document.getElementById('m-wt').value    = p ? p.wt    : '';
+    document.getElementById('m-pr').value    = p ? p.pr    : '';
+    document.getElementById('m-tag').value   = p ? p.tag   : '';
+    document.getElementById('m-img').value   = p ? p.img   : '';
+    document.getElementById('m-clr').value   = p ? p.clr   : '#F7EFE3';
+    document.getElementById('m-clr-picker').value = p ? (p.clr || '#F7EFE3') : '#F7EFE3';
+    document.getElementById('m-desc').value  = p ? p.desc  : '';
+    document.getElementById('m-ingr').value  = p ? p.ingr  : '';
+    document.getElementById('m-stock').value = p ? p.stock : 0;
+    document.getElementById('m-active').checked = p ? p.active : true;
+    document.getElementById('m-active-label').textContent = (!p || p.active) ? '上架中' : '已下架';
+
+    var hasFlavors = p && !!p.flavors;
+    document.getElementById('m-has-flavors').checked = hasFlavors;
+    toggleFlavorMode();
+
+    if (hasFlavors) {
+      renderFlavorList(parseFlavors(p.flavors));
+    }
+
+    document.getElementById('modal-bg').classList.add('on');
+  }
+
+  function closeModal() {
+    document.getElementById('modal-bg').classList.remove('on');
+  }
+
+  /* ────────────────────────────────
+     Flavor Mode Toggle
+  ──────────────────────────────── */
+  function toggleFlavorMode() {
+    var on = document.getElementById('m-has-flavors').checked;
+    document.getElementById('simple-stock-section').style.display  = on ? 'none'  : 'block';
+    document.getElementById('flavor-stock-section').style.display  = on ? 'block' : 'none';
+    if (on && document.getElementById('flavor-list').children.length === 0) {
+      addFlavorRow();
+    }
+  }
+
+  function renderFlavorList(flavors) {
+    document.getElementById('flavor-list').innerHTML = '';
+    flavors.forEach(function(f) { addFlavorRow(f.n, f.s); });
+  }
+
+  function addFlavorRow(name, stock) {
+    var row = document.createElement('div');
+    row.className = 'flavor-row';
+    row.innerHTML =
+      '<input type="text" class="finput flv-name" placeholder="口味名稱" value="' + (name||'') + '" style="flex:2">'
+      + '<input type="number" class="finput flv-stock" placeholder="庫存" min="0" value="' + (stock||0) + '" style="flex:1">'
+      + '<button class="btn-sm danger" onclick="this.parentElement.remove()" style="flex-shrink:0">✕</button>';
+    document.getElementById('flavor-list').appendChild(row);
+  }
+
+  /* ────────────────────────────────
+     Save Product
+  ──────────────────────────────── */
+  function saveProduct() {
+    var name = document.getElementById('m-name').value.trim();
+    var pr   = document.getElementById('m-pr').value.trim();
+    if (!name || !pr) { toast('商品名稱和價格為必填'); return; }
+
+    var hasFlavors = document.getElementById('m-has-flavors').checked;
+    var flavorsStr = '';
+
+    if (hasFlavors) {
+      var rows = document.querySelectorAll('#flavor-list .flavor-row');
+      var flavors = [];
+      rows.forEach(function(r) {
+        var n = r.querySelector('.flv-name').value.trim();
+        var s = parseInt(r.querySelector('.flv-stock').value) || 0;
+        if (n) flavors.push(n + ':' + s);
+      });
+      flavorsStr = flavors.join('|');
+    }
+
+    var prod = {
+      id:      document.getElementById('m-id').value || null,
+      name:    name,
+      wt:      document.getElementById('m-wt').value.trim(),
+      pr:      Number(pr),
+      tag:     document.getElementById('m-tag').value.trim(),
+      img:     document.getElementById('m-img').value.trim(),
+      desc:    document.getElementById('m-desc').value.trim(),
+      ingr:    document.getElementById('m-ingr').value.trim(),
+      clr:     document.getElementById('m-clr').value.trim() || '#F7EFE3',
+      active:  document.getElementById('m-active').checked,
+      stock:   hasFlavors ? 0 : (parseInt(document.getElementById('m-stock').value) || 0),
+      flavors: flavorsStr
+    };
+
+    gasPost({ action:'saveProduct', token:adminToken, product:prod })
+      .then(function(d) {
+        if (d.result === 'success') {
+          toast('✓ 商品已儲存');
+          closeModal();
+          loadProducts();
+        } else {
+          toast('儲存失敗：' + d.error);
+        }
+      });
+  }
+
+  /* ────────────────────────────────
+     Helpers
+  ──────────────────────────────── */
+  function gasPost(payload) {
+    return fetch(GAS_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body:    JSON.stringify(payload)
+    }).then(function(r) { return r.json(); });
+  }
+
+  function parseFlavors(str) {
+    if (!str) return [];
+    return str.split('|').filter(Boolean).map(function(f) {
+      var p = f.split(':');
+      return { n: p[0] || '', s: parseInt(p[1]) || 0 };
+    });
+  }
+
+  function toast(msg) {
+    var el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('on');
+    setTimeout(function() { el.classList.remove('on'); }, 2400);
+  }
+
+  // Close modal on background click
+  document.getElementById('modal-bg').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
+</body>
+</html>
