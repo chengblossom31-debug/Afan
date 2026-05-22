@@ -260,20 +260,13 @@
 <script>
 
   /* 字串跳脫（\' 和 \"）issue */
-function imgErr(el) {
-  el.style.display = 'none';
-  var ph = el.parentElement.querySelector('.pimg-placeholder');
-  if (ph) ph.style.display = 'block';
-}
 function imgErrDetail(el) {
   el.style.display = 'none';
-  var box = el.parentElement;
-  box.style.display = 'flex';
-  box.style.alignItems = 'center';
-  box.style.justifyContent = 'center';
-  box.innerHTML = '<div style="text-align:center;padding:2rem">'
-    + '<div style="font-family:Songti SC,Georgia,serif;font-size:28px;color:#5C3317">'
-    + el.alt + '</div></div>';
+  var label = document.createElement('div');
+  label.style.cssText = 'text-align:center;padding:2rem';
+  label.innerHTML = '<div style="font-family:\'Songti SC\',Georgia,serif;font-size:28px;color:#5C3317">'
+    + el.alt + '</div>';
+  el.parentElement.appendChild(label);
 }
 
 
@@ -461,11 +454,10 @@ function openProd(id) {
   flv = activeFlavors.length ? activeFlavors[0].n : null;
   qty = 1;
 
-  // Left: image
+// Left: image
   document.getElementById('d-img').innerHTML =
     '<div class="dimg-box" style="background:'+cur.clr+'">'
-    + '<img src="'+cur.img+'" alt="'+cur.name+'" style="width:100%;height:100%;object-fit:cover" '
-    + 'onerror="this.style.display=\'none\';this.parentElement.innerHTML+=\'<div style=\\\"text-align:center;padding:2rem\\\"><div style=\\\"font-family:Songti SC,Georgia,serif;font-size:28px;color:#5C3317\\\">'+cur.name+'</div></div>\'">'
+    + '<img src="'+cur.img+'" alt="'+cur.name+'" style="width:100%;height:100%;object-fit:cover" onerror="imgErrDetail(this)">'
     + '</div>';
 
   // Right: info
